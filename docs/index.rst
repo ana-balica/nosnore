@@ -1,16 +1,47 @@
-.. nosnore documentation master file, created by
-   sphinx-quickstart on Tue Feb 25 10:47:55 2014.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+=====================
+nosnore documentation
+=====================
 
-Welcome to nosnore's documentation!
-===================================
-
-Contents:
+Introducing nosnore 
+===================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
+   intro/general
+   intro/features
+
+
+Getting Started 
+===============
+
+.. toctree::
+   :maxdepth: 1
+
+   start/install
+   start/use
+   start/configure
+   start/tips
+
+Main Documentation
+==================
+
+.. toctree::
+   :maxdepth: 1
+
+   dev/install
+   dev/run
+   dev/testing
+   dev/translate
+   dev/contribute
+
+API Docs
+========
+
+.. toctree::
+   :maxdepth: 3
+
+   api/nosnore
 
 
 Indices and tables
@@ -19,4 +50,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
