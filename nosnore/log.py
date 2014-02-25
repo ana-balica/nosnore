@@ -13,8 +13,8 @@ def getLogger(name):
         from nosnore import log
         logging = log.getLogger(__name__)
 
-    @param name: filename origin of logging
-    @return: logger object
+    :param name: filename origin of logging
+    :return: logger object
     """
     logging.config.fileConfig('nosnore/configs/logging.conf')
     logger = logging.getLogger(name)
