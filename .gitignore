@@ -40,3 +40,7 @@ env/
 
 # sphinx build documentation
 docs/_build/*
+
+# Project specific files
+nosnore/articles/*
+nosnore/samples/*
