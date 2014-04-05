@@ -15,7 +15,7 @@ def plot_signal(name):
     with open(info_name, "r") as f:
         info_lines = f.readlines()
     interval, gain, base, units = parse_info(info_lines)
-    mat_data = get_mat_data(mat_data, base, gain)
+    mat_data = get_mat_data(mat_name, base, gain)
     x = numpy.arange(0, mat_data.shape[1]) * interval
 
     pl.plot(x, mat_data[0])
@@ -57,4 +57,4 @@ def get_mat_data(mat_name, base, gain):
 
 
 if __name__ == '__main__':
-    plot_signal('../samples/ucddb/short_sound_records/ucddb002_recm')
+    plot_signal('../samples/ucddb/short_sound_records/ucddb003_recm')
