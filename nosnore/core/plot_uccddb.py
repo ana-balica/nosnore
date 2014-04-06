@@ -2,6 +2,7 @@ import re
 import numpy
 import pylab as pl
 import scipy.io as sio
+from scipy import fft
 
 
 def get_singal_info(name):
@@ -93,6 +94,32 @@ def plot_autocorrelated_signal(name):
     pl.plot(x, autocorrelated_data)
     pl.xlabel('Time (sec)')
     pl.ylabel('Sound signal ACF')
+    pl.show()
+
+def get_psd_data(mat_data):
+    """Compute and return power spectral density of the signal described by data
+
+    :param mat_data: numpy array that describes the signal
+    :return: power spectrum density data
+    """
+    return abs(fft(mat_data))
+
+
+def plot_psd_signal(name):
+    """Plot x,y graph of power spectral density of a sound signal
+
+    :param name: filename of the signal to be processed
+    """
+    info_name = name + ".info"
+    mat_name = name + ".mat"
+
+    interval, gain, base, units = get_singal_info(info_name)
+    mat_data = get_mat_data(mat_name, base, gain)
+    psd = get_psd_data(mat_data[0])
+
+    pl.plot(psd)
+    pl.grid()
+    pl.title("Power Spectral Density of the signal")
     pl.show()
 
 
