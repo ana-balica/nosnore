@@ -60,6 +60,8 @@ def plot_time_signal(name):
     mat_data, x = get_timewave_data(name)
 
     pl.plot(x, mat_data[0])
+    pl.grid()
+    pl.title("Recorded signal")
     pl.xlabel('Time (sec)')
     pl.ylabel('Sound signal (nd)')
     pl.show()
@@ -70,15 +72,17 @@ def get_autocorrelated_data(mat_data):
 
     :param mat_data: numpy array of signal data
     """
-    autocorrelated_data = numpy.array([])
-    import pdb; pdb.set_trace()
-    for i in xrange(0, mat_data.shape[0], 100):
-        autocorrelated_data = numpy.append(autocorrelated_data, mat_data[i:i+100])
-    return autocorrelated_data
+    n = mat_data.shape[0]
+    R = numpy.zeros((n/2))
+    for lag in xrange(0, n/2):
+        x = mat_data[0:n-lag]
+        y = mat_data[lag:]
+        R[lag] = numpy.mean((x - numpy.mean(x)) * (y - numpy.mean(y)))/numpy.std(x)/numpy.std(y)
+    return R
 
 
 def plot_autocorrelated_signal(name):
-    """Plot x,y graph of a sound signal in frequency domain
+    """Plot x,y graph of a sound signal that was autocorrelated
 
     :param name: filename of the signal to be processed
     """
@@ -89,11 +93,11 @@ def plot_autocorrelated_signal(name):
     mat_data = get_mat_data(mat_name, base, gain)
     x = numpy.arange(0, mat_data.shape[1]) * interval
 
-    autocorrelated_data = get_autocorrelated_data(mat_data[0])
+    r = get_autocorrelated_data(mat_data[0][:2000])
     
-    pl.plot(x, autocorrelated_data)
-    pl.xlabel('Time (sec)')
-    pl.ylabel('Sound signal ACF')
+    pl.plot(r)
+    pl.grid()
+    pl.title("Autocorrelation R(signal, signal_lag)")
     pl.show()
 
 def get_psd_data(mat_data):
@@ -123,6 +127,40 @@ def plot_psd_signal(name):
     pl.show()
 
 
+def plot_all(name):
+    info_name = name + ".info"
+    mat_name = name + ".mat"
+
+    interval, gain, base, units = get_singal_info(info_name)
+    mat_data = get_mat_data(mat_name, base, gain)
+    print "mat_data computed"
+    time = numpy.arange(0, mat_data.shape[1]) * interval
+    r = get_autocorrelated_data(mat_data[0][:40000])
+    print "R computed"
+    psd = get_psd_data(r)
+    print "PSD computed"
+
+    pl.figure(1)
+    pl.subplot(311)
+    pl.plot(time, mat_data[0])
+    pl.grid()
+    pl.title("Recorded signal")
+
+    pl.subplot(312)
+    pl.plot(r)
+    pl.grid()
+    pl.title("Autocorrelation of the signal")
+
+    pl.subplot(313)
+    pl.plot(psd)
+    pl.grid()
+    pl.title("Power Spectral Density of the signal")
+    pl.show()
+
+
 if __name__ == '__main__':
     # plot_time_signal('../samples/ucddb/short_sound_records/ucddb003_recm')
-    plot_autocorrelated_signal('../samples/ucddb/short_sound_records/ucddb003_recm')
+    # plot_autocorrelated_signal('../samples/ucddb/short_sound_records/ucddb003_recm')
+    # plot_psd_signal('../samples/ucddb/short_sound_records/ucddb003_recm')
+    plot_all('../samples/ucddb/short_sound_records/ucddb005_recm')
+    # plot_all('../samples/ucddb/ucddb005_recm')
