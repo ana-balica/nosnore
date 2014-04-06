@@ -64,7 +64,19 @@ def plot_time_signal(name):
     pl.show()
 
 
-def plot_frequency_signal(name):
+def get_autocorrelated_data(mat_data):
+    """Compute and return autocorrelated signal
+
+    :param mat_data: numpy array of signal data
+    """
+    autocorrelated_data = numpy.array([])
+    import pdb; pdb.set_trace()
+    for i in xrange(0, mat_data.shape[0], 100):
+        autocorrelated_data = numpy.append(autocorrelated_data, mat_data[i:i+100])
+    return autocorrelated_data
+
+
+def plot_autocorrelated_signal(name):
     """Plot x,y graph of a sound signal in frequency domain
 
     :param name: filename of the signal to be processed
@@ -72,23 +84,18 @@ def plot_frequency_signal(name):
     info_name = name + ".info"
     mat_name = name + ".mat"
 
-    with open(info_name, "r") as f:
-        info_lines = f.readlines()
-    interval, gain, base, units = parse_info(info_lines)
+    interval, gain, base, units = get_singal_info(info_name)
     mat_data = get_mat_data(mat_name, base, gain)
     x = numpy.arange(0, mat_data.shape[1]) * interval
 
-    print "starting autocorrelation"
-    print mat_data[0][:3]
-    cor_mat_data = numpy.correlate(mat_data[0][:100], mat_data[0][:100], "same")
-    print len(cor_mat_data)
-    print x.shape
-    pl.plot(x[:100], cor_mat_data)
+    autocorrelated_data = get_autocorrelated_data(mat_data[0])
+    
+    pl.plot(x, autocorrelated_data)
     pl.xlabel('Time (sec)')
     pl.ylabel('Sound signal ACF')
-    # pl.show()
+    pl.show()
 
 
 if __name__ == '__main__':
-    plot_time_signal('../samples/ucddb/short_sound_records/ucddb003_recm')
-    # plot_frequency_signal('../samples/ucddb/short_sound_records/ucddb003_recm')
+    # plot_time_signal('../samples/ucddb/short_sound_records/ucddb003_recm')
+    plot_autocorrelated_signal('../samples/ucddb/short_sound_records/ucddb003_recm')
