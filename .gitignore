@@ -44,3 +44,6 @@ docs/_build/*
 # Project specific files
 nosnore/articles/*
 nosnore/samples/*
+
+# Generated images
+*.png
