@@ -20,3 +20,24 @@ def compute_psd(signal, time):
 def get_envelope(signal):
     return envelope(signal)
 
+
+def select_features(data, freqs):
+    CHUNK_SIZE = 635
+    start = 0
+    end = CHUNK_SIZE
+    chunks = []
+    while end < data.size:
+        try:
+            chunks.extend([data[start:end]])
+        except IndexError:
+            chunks.extend([data[start:]])
+        start = end
+        end += CHUNK_SIZE
+    features = []
+    for i, chunk in enumerate(chunks):
+        local_max = chunk.max()
+        local_max_index = np.argmax(chunk)
+        freq = freqs[local_max_index+(CHUNK_SIZE*i)]
+        features.extend([(local_max, freq)])
+    return features
+
