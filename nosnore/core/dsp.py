@@ -12,5 +12,5 @@ def compute_psd(signal, time):
     datafft = np.fft.rfft(signal*np.hanning(len(signal)))
     datafft = abs(datafft)
     datafft = 10*np.log10(datafft)
-    x_vals = np.fft.fftfreq(len(signal), time[1]-time[0])
-    return x_vals, datafft
+    freqs = np.fft.fftfreq(signal.size, time[1]-time[0])
+    return freqs[:datafft.size-1], datafft[:-1]
