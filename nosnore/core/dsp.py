@@ -1,5 +1,6 @@
 import numpy as np 
 import pylab as pl
+from obspy.signal import highpass, envelope
 
 
 def autocorrelate(signal):
@@ -14,3 +15,8 @@ def compute_psd(signal, time):
     datafft = 10*np.log10(datafft)
     freqs = np.fft.fftfreq(signal.size, time[1]-time[0])
     return freqs[:datafft.size-1], datafft[:-1]
+
+
+def get_envelope(signal):
+    return envelope(signal)
+
