@@ -1,7 +1,9 @@
+import pprint
+
 import numpy as np 
 import pylab as pl
 from scipy.io import wavfile
-from nosnore.core.dsp import highpassfilter, autocorrelate, compute_psd, get_envelope
+from nosnore.core.dsp import highpassfilter, autocorrelate, compute_psd, get_envelope, select_features, filter_features
 
 
 def getwavdata(filename):
@@ -32,11 +34,24 @@ def save_plot(data, name, x_vals=None):
     pl.savefig(name)
 
 
-def plot_some_signals():
-    f = "nosnore/samples/cvut/01pcp_data.wav"
-    rate, data = getwavdata(f)
-    n = data.size
-    time = np.linspace(0, n/rate, num=n)
+def show_plot(data, x_vals=None):
+    pl.clf()
+    if x_vals is not None:
+        pl.plot(x_vals, data)
+    else:
+        pl.plot(data)
+    pl.grid()
+    pl.show()
+
+
+def save_features(features, filename):
+    with open(filename, "wb") as f:
+        f.write("Power\t\t\t\t\tFrequency\n")
+        for feature in features:
+            f.write("{0}\t\t\t{1}\n".format(feature[0], feature[1]))
+
+
+def plot_some_signals(data, time):
     chunks = make_chunks(data, 70000)
     for i, chunk in enumerate(chunks):
         # save the chunk in the time domain
@@ -51,11 +66,28 @@ def plot_some_signals():
         if i == 9:
             break
 
+
 if __name__ == '__main__':
+    pp = pprint.PrettyPrinter(indent=4)
+
     files = ["nosnore/samples/cvut/01pcp_data.wav",
              "nosnore/samples/cvut/02pcp_data.wav",
              "nosnore/samples/cvut/03pcp_data.wav",
              "nosnore/samples/cvut/04pcp_data.wav",
              "nosnore/samples/cvut/05pcp_data.wav",
              "nosnore/samples/cvut/06pcp_data.wav"]
+
+    rate, data = getwavdata(files[0])
+    n = data.size
+    time = np.linspace(0, n/rate, num=n)
+
+    chunks = make_chunks(data, 70000)
+    autocorr = autocorrelate(chunks[2])
+    freqs, datafft = compute_psd(autocorr, time)
+    features = select_features(datafft, freqs)
+    filtered_features = filter_features(features, 15)
+    filtered_features.sort(key=lambda tup: tup[1])
+    # pp.pprint(filtered_features)
+    save_features(filtered_features, "3features.txt")
+    # show_plot(datafft, freqs)
 
