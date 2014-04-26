@@ -1,5 +1,7 @@
+import heapq
 import numpy as np 
 import pylab as pl
+from operator import itemgetter
 from obspy.signal import highpass, envelope
 
 
@@ -19,6 +21,11 @@ def compute_psd(signal, time):
 
 def get_envelope(signal):
     return envelope(signal)
+
+
+def filter_features(features, n):
+    features = [(power, freq) for power, freq in features if freq != 0]
+    return heapq.nlargest(n, features, key=itemgetter(0))
 
 
 def select_features(data, freqs):
