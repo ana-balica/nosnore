@@ -67,6 +67,23 @@ def plot_some_signals(data, time):
             break
 
 
+def add_noise(signal, time):
+    other_signal = 5000 * np.sin(3*time)
+    other_signal += 100 * np.random.normal(size=other_signal.shape)
+    result = signal + other_signal
+
+    pl.figure()
+    pl.subplot(311)
+    pl.plot(time, signal)
+    pl.subplot(312)
+    pl.plot(time, other_signal)
+    pl.subplot(313)
+    pl.plot(time, result)
+
+    # pl.show()
+    return result
+
+
 if __name__ == '__main__':
     pp = pprint.PrettyPrinter(indent=4)
 
@@ -82,12 +99,13 @@ if __name__ == '__main__':
     time = np.linspace(0, n/rate, num=n)
 
     chunks = make_chunks(data, 70000)
-    autocorr = autocorrelate(chunks[2])
-    freqs, datafft = compute_psd(autocorr, time)
-    features = select_features(datafft, freqs)
-    filtered_features = filter_features(features, 15)
-    filtered_features.sort(key=lambda tup: tup[1])
-    # pp.pprint(filtered_features)
-    save_features(filtered_features, "3features.txt")
-    # show_plot(datafft, freqs)
+    signal = add_noise(chunks[0], time[:chunks[0].size])
 
+    # autocorr = autocorrelate(chunks[2])
+    # freqs, datafft = compute_psd(autocorr, time)
+    # features = select_features(datafft, freqs)
+    # filtered_features = filter_features(features, 15)
+    # filtered_features.sort(key=lambda tup: tup[1])
+    # pp.pprint(filtered_features)
+    # save_features(filtered_features, "3features.txt")
+    # show_plot(datafft, freqs)
