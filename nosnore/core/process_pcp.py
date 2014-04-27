@@ -3,6 +3,7 @@ import pprint
 import numpy as np 
 import pylab as pl
 from scipy.io import wavfile
+from sklearn.decomposition import FastICA
 from nosnore.core.dsp import highpassfilter, autocorrelate, compute_psd, get_envelope, select_features, filter_features
 
 
@@ -69,8 +70,10 @@ def plot_some_signals(data, time):
 
 def add_noise(signal, time):
     other_signal = 5000 * np.sin(3*time)
-    other_signal += 100 * np.random.normal(size=other_signal.shape)
-    result = signal + other_signal
+    result = np.c_[signal, other_signal]
+    result += 100 * np.random.normal(size=result.shape)
+    mixing = np.array([[1, 1], [0, 2]])
+    x_result = np.dot(result, mixing.T)
 
     pl.figure()
     pl.subplot(311)
@@ -78,10 +81,11 @@ def add_noise(signal, time):
     pl.subplot(312)
     pl.plot(time, other_signal)
     pl.subplot(313)
-    pl.plot(time, result)
+    pl.plot(time, x_result)
 
     # pl.show()
-    return result
+    return x_result
+
 
 
 if __name__ == '__main__':
