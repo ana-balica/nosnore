@@ -73,7 +73,7 @@ def add_noise(signal, time):
     other_signal = 5000 * np.sin(3*time)
     result = np.c_[signal, other_signal]
     result += 100 * np.random.normal(size=result.shape)
-    mixing = np.array([[1, 1], [0, 2]])
+    mixing = np.array([[0, 1], [1, 1]])
     x_result = np.dot(result, mixing.T)
 
     pl.figure()
