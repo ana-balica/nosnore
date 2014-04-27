@@ -6,6 +6,7 @@ from scipy.io import wavfile
 from sklearn.decomposition import FastICA
 
 from nosnore.core.dsp import autocorrelate, compute_psd, get_envelope, select_features, filter_features
+from nosnore.io.csvdata import add_rows
 
 
 def getwavdata(filename):
@@ -83,8 +84,8 @@ def add_noise(signal, time):
     pl.plot(time, other_signal)
     pl.subplot(313)
     pl.plot(time, x_result)
-
     # pl.show()
+
     return x_result
 
 
@@ -102,6 +103,21 @@ def decompose(signal, components_count, time):
     return components
 
 
+def save_features(filename, sid, features, ica=False):
+    rows = []
+    for feature in features:
+        rows.append([str(sid), feature[0], feature[1], ica])
+    add_rows(filename, rows)
+
+
+def get_features(signal, time):
+    autocorr = autocorrelate(signal)
+    freqs, datafft = compute_psd(autocorr, time)
+    features = select_features(datafft, freqs)
+    filtered_features = filter_features(features, 15)
+    filtered_features.sort(key=lambda tup: tup[1])
+    return filtered_features
+
 
 if __name__ == '__main__':
     pp = pprint.PrettyPrinter(indent=4)
@@ -117,15 +133,17 @@ if __name__ == '__main__':
     n = data.size
     time = np.linspace(0, n/rate, num=n)
 
+    sid = 100
     chunks = make_chunks(data, 70000)
-    signal = add_noise(chunks[0], time[:chunks[0].size])
-    recovered_signals = decompose(signal, 2, time[:chunks[0].size])
+    for i, chunk in enumerate(chunks):
+        t = time[:chunk.size]
+        features = get_features(chunk, t)
+        save_features('nosnore/data/features_pcp.py', sid+int(i), features)
 
-    # autocorr = autocorrelate(chunks[2])
-    # freqs, datafft = compute_psd(autocorr, time)
-    # features = select_features(datafft, freqs)
-    # filtered_features = filter_features(features, 15)
-    # filtered_features.sort(key=lambda tup: tup[1])
-    # pp.pprint(filtered_features)
-    # save_features(filtered_features, "3features.txt")
-    # show_plot(datafft, freqs)
+        signal = add_noise(chunk, t)
+        components = decompose(signal, 2, t)
+        new_signal = components[:,1]
+        features = get_features(new_signal, t)
+        save_features('nosnore/data/features_pcp.py', sid+int(i), features, True)
+
+        print "Chunk {0} features extracted and saved\n".format(sid+int(i))
