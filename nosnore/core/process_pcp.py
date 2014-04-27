@@ -4,6 +4,7 @@ import numpy as np
 import pylab as pl
 from scipy.io import wavfile
 from sklearn.decomposition import FastICA
+
 from nosnore.core.dsp import highpassfilter, autocorrelate, compute_psd, get_envelope, select_features, filter_features
 
 
@@ -87,6 +88,20 @@ def add_noise(signal, time):
     return x_result
 
 
+def decompose(signal, components_count, time):
+    ica = FastICA(n_components=2)
+    recovered = ica.fit_transform(signal)
+
+    pl.figure()
+    pl.subplot(211)
+    pl.plot(time, signal)
+    pl.subplot(212)
+    pl.plot(time, recovered[:,1])
+    # pl.show()
+
+    return recovered
+
+
 
 if __name__ == '__main__':
     pp = pprint.PrettyPrinter(indent=4)
@@ -104,6 +119,7 @@ if __name__ == '__main__':
 
     chunks = make_chunks(data, 70000)
     signal = add_noise(chunks[0], time[:chunks[0].size])
+    recovered_signals = decompose(signal, 2, time[:chunks[0].size])
 
     # autocorr = autocorrelate(chunks[2])
     # freqs, datafft = compute_psd(autocorr, time)
