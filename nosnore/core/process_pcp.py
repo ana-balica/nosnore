@@ -89,17 +89,17 @@ def add_noise(signal, time):
 
 
 def decompose(signal, components_count, time):
-    ica = FastICA(n_components=2)
-    recovered = ica.fit_transform(signal)
-
+    estimator = FastICA(n_components=2)
+    components = estimator.fit_transform(signal)
+    
     pl.figure()
     pl.subplot(211)
     pl.plot(time, signal)
     pl.subplot(212)
-    pl.plot(time, recovered[:,1])
+    pl.plot(time, components)
     # pl.show()
 
-    return recovered
+    return components
 
 
 
