@@ -5,7 +5,7 @@ import pylab as pl
 from scipy.io import wavfile
 from sklearn.decomposition import FastICA
 
-from nosnore.core.dsp import highpassfilter, autocorrelate, compute_psd, get_envelope, select_features, filter_features
+from nosnore.core.dsp import autocorrelate, compute_psd, get_envelope, select_features, filter_features
 
 
 def getwavdata(filename):
