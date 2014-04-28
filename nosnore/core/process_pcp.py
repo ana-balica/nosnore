@@ -6,7 +6,7 @@ from scipy.io import wavfile
 from sklearn.decomposition import FastICA
 
 from nosnore.core.dsp import autocorrelate, compute_psd, get_envelope, select_features, filter_features
-from nosnore.io.csvdata import add_rows
+from nosnore.io.csvdata import add_rows, read_feature_rows
 
 
 def getwavdata(filename):
@@ -119,6 +119,20 @@ def get_features(signal, time):
     return filtered_features
 
 
+def compare_features(filename, up, to):
+    feature_frequency = dict()
+    for i in xrange(up, to):
+        print "Process chunk {0}".format(i)
+        features = read_feature_rows(filename, i)
+        features = [int(float(f)) for f in features]
+        for f in features:
+            if f in feature_frequency:
+                feature_frequency[f] += 1
+            else:
+                feature_frequency[f] = 1
+    return feature_frequency
+
+
 if __name__ == '__main__':
     pp = pprint.PrettyPrinter(indent=4)
 
@@ -138,7 +152,7 @@ if __name__ == '__main__':
     for i, chunk in enumerate(chunks):
         t = time[:chunk.size]
         features = get_features(chunk, t)
-        save_features('nosnore/data/features_pcp.py', sid+int(i), features)
+        save_features('nosnore/data/features_pcp.txt', sid+int(i), features)
 
         signal = add_noise(chunk, t)
         components = decompose(signal, 2, t)
@@ -147,3 +161,5 @@ if __name__ == '__main__':
         save_features('nosnore/data/features_pcp.py', sid+int(i), features, True)
 
         print "Chunk {0} features extracted and saved\n".format(sid+int(i))
+
+    pp.pprint(compare_features('nosnore/data/features_pcp.txt', 100, 281))
