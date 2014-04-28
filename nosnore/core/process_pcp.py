@@ -133,6 +133,17 @@ def compare_features(filename, up, to):
     return feature_frequency
 
 
+def compare_features_after_ica(filename, up, to):
+    results = dict()
+    for i in xrange(up, to):
+        features = read_feature_rows(filename, i)
+        features = [int(float(f)) for f in features]
+        features_ica = read_feature_rows(filename, i, True)
+        features_ica = [int(float(f)) for f in features_ica]
+        results[i] = len(set(features) & set(features_ica))
+    return results
+
+
 if __name__ == '__main__':
     pp = pprint.PrettyPrinter(indent=4)
 
@@ -163,3 +174,4 @@ if __name__ == '__main__':
         print "Chunk {0} features extracted and saved\n".format(sid+int(i))
 
     pp.pprint(compare_features('nosnore/data/features_pcp.txt', 100, 281))
+    pp.pprint(compare_features_after_ica('nosnore/data/features_pcp.txt', 100, 281))
