@@ -48,3 +48,6 @@ nosnore/samples/*
 # Generated images
 *.png
 *.jpg
+
+# Resulting data
+data/
