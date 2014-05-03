@@ -1,10 +1,6 @@
-from collections import namedtuple
-
-
 import numpy as np 
 import pylab as pl
 from scipy.io import wavfile
-from obspy.signal import envelope
 
 
 def getwavdata(filename):
