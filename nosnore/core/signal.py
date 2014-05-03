@@ -11,19 +11,38 @@ def getwavdata(filename):
     return wavfile.read(filename)
 
 
-FFT = namedtuple('FFT', 'freqs power')
-
-
 class Signal(object):
     def __init__(self, signal, time):
-        self.signal = signal
-        self.size = signal.size
-        self.time = time
-        self.autocorr = None
-        self.psd_ = None
+        self._signal = signal
+        self._size = signal.size
+        self._time = time
 
-        if self.size != self.time.size:
-            raise Exception("X and Y axis should have same size")
+        if self._size != self._time.size:
+            raise ValueError("Signal dimentions should coincide")
+
+    @property
+    def signal(self):
+        return self._signal
+
+    @signal.setter
+    def signal(self, value):
+        self._signal = value
+    
+    @property
+    def size(self):
+        return self._size
+
+    @size.setter
+    def size(self, value):
+        self._size = value
+    
+    @property
+    def time(self):
+        return self._time
+
+    @time.setter
+    def time(self, value):
+        self._time = value
 
     def split(self, window):
         start = 0
@@ -37,26 +56,3 @@ class Signal(object):
             start = end
             end += window
         return chunks
-
-    def autocorrelate(self):
-        freqs = np.fft.rfft(self.signal)
-        auto = freqs * np.conj(freqs)
-        self.autocorr = np.fft.irfft(auto)
-        return self.autocorr
-
-    def psd(self, autocorr=True):
-        if autocorr:
-            signal = self.autocorr
-            if autocorr is None:
-                raise ValueError("First perform autocorrelation")
-        else:
-            signal = self.signal
-        datafft = np.fft.rfft(signal*np.hanning(self.size))
-        datafft = abs(datafft)
-        datafft = 10*np.log10(datafft)
-        freqs = np.fft.fftfreq(self.size, self.time[1]-self.time[0])
-        self.psd_ = FFT(freqs[:datafft.size-1], datafft[:-1])
-        return self.psd_
-
-    def envelope(self):
-        return envelope(self.signal)
