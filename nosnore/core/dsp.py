@@ -1,70 +1,52 @@
-import heapq
-import numpy as np 
+from collections import namedtuple
+from math import factorial
+
+import numpy as np
 import pylab as pl
-from operator import itemgetter
-from obspy.signal import highpass, envelope
+from obspy.signal import envelope
+
+
+FFT = namedtuple('FFT', 'freqs power')
 
 
 def autocorrelate(signal):
     freqs = np.fft.rfft(signal)
     auto = freqs * np.conj(freqs)
     return np.fft.irfft(auto)
+    
 
-
-def compute_psd(signal, time):
-    datafft = np.fft.rfft(signal*np.hanning(len(signal)))
+def psd(signal, time):
+    size = signal.size
+    datafft = np.fft.rfft(signal*np.hanning(size))
     datafft = abs(datafft)
     datafft = 10*np.log10(datafft)
-    freqs = np.fft.fftfreq(signal.size, time[1]-time[0])
-    return freqs[:datafft.size-1], datafft[:-1]
+    freqs = np.fft.fftfreq(size, time[1]-time[0])
+    return FFT(freqs[:datafft.size-1], datafft[:-1])
 
 
-def smooth(signal, window_len=11, window='hanning'):
-    if signal.ndim != 1:
-            raise ValueError, "Smooth only accepts 1 dimension arrays."
-    if signal.size < window_len:
-            raise ValueError, "Input vector needs to be bigger than window size."
-    if window_len < 3:
-            return signal
-    if not window in ['flat', 'hanning', 'hamming', 'bartlett', 'blackman']:
-            raise ValueError, "Window is on of 'flat', 'hanning', 'hamming', 'bartlett', 'blackman'"
-
-    s = np.r_[2*signal[0]-signal[window_len-1::-1], signal, 2*signal[-1]-signal[-1:-window_len:-1]]
-    if window == 'flat':
-            w = np.ones(window_len,'d')
-    else:  
-            w = eval('np.'+window+'(window_len)')
-
-    y = np.convolve(w/w.sum(), s, mode='same')
-    return y[window_len:-window_len+1]
-
-
-def get_envelope(signal):
+def envelope(signal):
     return envelope(signal)
 
 
-def filter_features(features, n):
-    features = [(power, freq) for power, freq in features if freq != 0]
-    return heapq.nlargest(n, features, key=itemgetter(0))
+def smooth(signal, window_size, order, deriv=0, rate=1):
+    try:
+        window_size = np.abs(np.int(window_size))
+        order = np.abs(np.int(order))
+    except ValueError, msg:
+        raise ValueError("Window_size and order have to be of type int")
+    if window_size % 2 != 1 or window_size < 1:
+        raise TypeError("Window_size size must be a positive odd number")
+    if window_size < order + 2:
+        raise TypeError("window_size is too small for the polynomials order")
 
-
-def select_features(data, freqs):
-    CHUNK_SIZE = 635
-    start = 0
-    end = CHUNK_SIZE
-    chunks = []
-    while end < data.size:
-        try:
-            chunks.extend([data[start:end]])
-        except IndexError:
-            chunks.extend([data[start:]])
-        start = end
-        end += CHUNK_SIZE
-    features = []
-    for i, chunk in enumerate(chunks):
-        local_max = chunk.max()
-        local_max_index = np.argmax(chunk)
-        freq = freqs[local_max_index+(CHUNK_SIZE*i)]
-        features.extend([(local_max, freq)])
-    return features
-
+    order_range = range(order+1)
+    half_window = (window_size -1) // 2
+    # precompute coefficients
+    b = np.mat([[k**i for i in order_range] for k in range(-half_window, half_window+1)])
+    m = np.linalg.pinv(b).A[deriv] * rate**deriv * factorial(deriv)
+    # pad the signal at the extremes with
+    # values taken from the signal itself
+    firstvals = signal[0] - np.abs( signal[1:half_window+1][::-1] - signal[0] )
+    lastvals = signal[-1] + np.abs(signal[-half_window-1:-1][::-1] - signal[-1])
+    signal = np.concatenate((firstvals, signal, lastvals))
+    return np.convolve( m[::-1], signal, mode='valid')
