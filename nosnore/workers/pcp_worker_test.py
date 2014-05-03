@@ -4,8 +4,10 @@
 import pprint
 
 import numpy as np
+from nosnore.core.dsp import autocorrelate, psd, smooth
 from nosnore.core.signal import getwavdata, Signal
-from nosnore.core.plot import save_signal_plots
+from nosnore.core.plot import subplot_start, subplot_continue, subplot_save, show_plot
+
 from nosnore import log
 logging = log.getLogger(__name__)
 
@@ -31,8 +33,17 @@ chunks = chunks[:10]
 for i, chunk in enumerate(chunks):
     short_time = time[:chunk.size]
     signal = Signal(chunk, short_time)
-    signal.autocorrelate()
-    signal.psd(autocorr=True)
+    autocorr_sig = autocorrelate(signal.signal)
+    psd_sig = psd(autocorr_sig, short_time)
+    smoothed = smooth(psd_sig[1], window_size=81, order=4)
+    for _ in xrange(20):
+        smoothed = smooth(smoothed, window_size=81, order=4)
+    # show_plot(smoothed)
 
-    save_signal_plots(signal, "nosnore/images/pcp_results/%02d_pcp_snore.png" % (i+1))
+    subplot_start()
+    subplot_continue(311, signal.signal, signal.time)
+    subplot_continue(312, psd_sig[1], psd_sig[0])
+    subplot_continue(313, smoothed)
+    subplot_save("nosnore/images/pcp_results/%02d_pcp_snore.png" % (i+1))
+
     logging.info("Saved signal chunk %02d" % (i+1))
