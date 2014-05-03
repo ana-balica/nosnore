@@ -21,17 +21,19 @@ def save_plot(data, name, x_vals=None):
     pl.savefig(name)
 
 
-def save_signal_plots(signal, name):
+def subplot_start():
     pl.clf()
     pl.figure(1)
-    pl.subplot(311)
-    pl.plot(signal.time, signal.signal)
-    pl.grid()
-    pl.subplot(312)
-    pl.plot(signal.autocorr)
-    pl.grid()
-    pl.subplot(313)
-    pl.plot(*signal.psd_)
+
+
+def subplot_continue(count, y_vals, x_vals=None):
+    pl.subplot(count)
+    if x_vals is not None:
+        pl.plot(x_vals, y_vals)
+    else:
+        pl.plot(y_vals)
     pl.grid()
 
+
+def subplot_save(name):
     pl.savefig(name)
