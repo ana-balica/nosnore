@@ -50,3 +50,40 @@ def smooth(signal, window_size, order, deriv=0, rate=1):
     lastvals = signal[-1] + np.abs(signal[-half_window-1:-1][::-1] - signal[-1])
     signal = np.concatenate((firstvals, signal, lastvals))
     return np.convolve( m[::-1], signal, mode='valid')
+
+
+def detect_formants(signal, delta):
+    maxtab = []
+    mintab = []
+
+    if delta <= 0:
+        raise ValueError('Input argument delta must be a positive scalar')
+    
+    mn, mx = np.Inf, -np.Inf
+    mnpos, mxpos = np.NaN, np.NaN
+    
+    lookformax = True
+    x = np.arange(len(signal))
+    for i in np.arange(len(signal)):
+        this = signal[i]
+        if this > mx:
+            mx = this
+            mxpos = x[i]
+        if this < mn:
+            mn = this
+            mnpos = x[i]
+        
+        if lookformax:
+            if this < mx-delta:
+                maxtab.append((mxpos, mx))
+                mn = this
+                mnpos = x[i]
+                lookformax = False
+        else:
+            if this > mn+delta:
+                mintab.append((mnpos, mn))
+                mx = this
+                mxpos = x[i]
+                lookformax = True
+
+    return maxtab, mintab
