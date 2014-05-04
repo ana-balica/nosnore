@@ -37,3 +37,12 @@ def subplot_continue(count, y_vals, x_vals=None):
 
 def subplot_save(name):
     pl.savefig(name)
+
+
+def save_plot_points(signal, points, name):
+    pl.clf()
+    pl.plot(*signal)
+    pl.hold(True)
+    x, y = points
+    pl.plot(x, y, 'r+')
+    pl.savefig(name)
