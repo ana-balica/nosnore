@@ -10,12 +10,23 @@ FFT = namedtuple('FFT', 'freqs power')
 
 
 def autocorrelate(signal):
+    """Perform autocorrelation on the signal using FFT
+
+    :param signal: numpy 1D array values of the time varying signal
+    :return: numpy 1D array autocorrelated signal
+    """
     freqs = np.fft.rfft(signal)
     auto = freqs * np.conj(freqs)
     return np.fft.irfft(auto)
     
 
 def psd(signal, time):
+    """Compute Power Spectral Density
+
+    :param signal: numpy 1D array values of the time varying signal
+    :param time: numpy 1D array time
+    :return: numpy 1D array power spectral density
+    """
     size = signal.size
     datafft = np.fft.rfft(signal*np.hanning(size))
     datafft = abs(datafft)
@@ -25,10 +36,25 @@ def psd(signal, time):
 
 
 def envelope(signal):
+    """Extract the envelope of the signal
+
+    :param signal: numpy 1D array values of the time varying signal
+    :return: numpy 1D array envelope 
+    """
     return envelope(signal)
 
 
 def smooth(signal, window_size, order, deriv=0, rate=1):
+    """Perform smoothing on the signal using Savitsky Golay Filtering
+    Original source - http://wiki.scipy.org/Cookbook/SavitzkyGolay
+
+    :param signal: numpy 1D array values of the time varying signal
+    :param window_size: odd int length of the window
+    :param order: int order of the polynomial used in the filtering 
+    :param deriv: int order of the derivative to compute (default = 0 means only smoothing)
+    :param rate: int rate
+    :return: numpy 1D array smoothed signal varying in time
+    """
     try:
         window_size = np.abs(np.int(window_size))
         order = np.abs(np.int(order))
@@ -53,6 +79,14 @@ def smooth(signal, window_size, order, deriv=0, rate=1):
 
 
 def detect_formants(signal, delta):
+    """Detect formants (peaks) in a vector.
+    A point will be considered a formant if it has the maximal value and is 
+    preceded to the left by a value lower than delta.
+    Original source - https://gist.github.com/endolith/250860
+
+    :param signal: numpy 1D array values of the time varying signal
+    :param delta: 
+    """
     maxtab = []
     mintab = []
 
