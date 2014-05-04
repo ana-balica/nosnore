@@ -4,9 +4,11 @@
 import pprint
 
 import numpy as np
-from nosnore.core.dsp import autocorrelate, psd, smooth
+import pylab as pl
+from scipy.signal import find_peaks_cwt
+from nosnore.core.dsp import autocorrelate, psd, smooth, detect_formants
 from nosnore.core.signal import getwavdata, Signal
-from nosnore.core.plot import subplot_start, subplot_continue, subplot_save, show_plot
+from nosnore.core.plot import subplot_start, subplot_continue, subplot_save, show_plot, save_plot_points
 
 from nosnore import log
 logging = log.getLogger(__name__)
@@ -38,12 +40,19 @@ for i, chunk in enumerate(chunks):
     smoothed = smooth(psd_sig[1], window_size=81, order=4)
     for _ in xrange(20):
         smoothed = smooth(smoothed, window_size=81, order=4)
-    # show_plot(smoothed)
+
+    logging.info("Formants for signal %02d" % (i+1))
+    maxtab, mintab = detect_formants(smoothed, psd_sig[0], delta=15)
+    xm = [p[0] for p in maxtab]
+    ym = [p[1] for p in maxtab]
+
+    save_plot_points((psd_sig[0], smoothed), (xm, ym), 
+                     "nosnore/images/pcp_results/%02d_pcp_snore_formants.png" % (i+1))
 
     subplot_start()
     subplot_continue(311, signal.signal, signal.time)
     subplot_continue(312, psd_sig[1], psd_sig[0])
-    subplot_continue(313, smoothed)
+    subplot_continue(313, smoothed, psd_sig[0])
     subplot_save("nosnore/images/pcp_results/%02d_pcp_snore.png" % (i+1))
 
     logging.info("Saved signal chunk %02d" % (i+1))
