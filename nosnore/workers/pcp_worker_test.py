@@ -5,17 +5,19 @@ import pprint
 
 import numpy as np
 import pylab as pl
-from scipy.signal import find_peaks_cwt
 from nosnore.core.dsp import autocorrelate, psd, smooth, detect_formants
 from nosnore.core.signal import getwavdata, Signal
 from nosnore.core.plot import subplot_start, subplot_continue, subplot_save, show_plot, save_plot_points
+from nosnore.io.db import SqliteDatabase
 
 from nosnore import log
 logging = log.getLogger(__name__)
 
+sqdb = SqliteDatabase("test_pcp_formants.db")
+sqdb.execute("""CREATE TABLE formants (id integer primary key autoincrement, sid integer, 
+                frequency real, power real)""", commit=True)
 
 CHUNK_SIZE = 70000
-
 
 pp = pprint.PrettyPrinter(indent=4)
 f = "nosnore/samples/cvut/01pcp_data.wav"
@@ -43,8 +45,12 @@ for i, chunk in enumerate(chunks):
 
     logging.info("Formants for signal %02d" % (i+1))
     maxtab, mintab = detect_formants(smoothed, psd_sig[0], delta=15)
-    xm = [p[0] for p in maxtab]
-    ym = [p[1] for p in maxtab]
+
+    formants = []
+    for peak in maxtab:
+        formants.append((str(i+1), str(peak[0]), str(peak[1])))
+
+    sqdb.executemany("INSERT INTO formants VALUES (NULL, ?, ?, ?)", formants)
 
     save_plot_points((psd_sig[0], smoothed), (xm, ym), 
                      "nosnore/images/pcp_results/%02d_pcp_snore_formants.png" % (i+1))
@@ -56,3 +62,5 @@ for i, chunk in enumerate(chunks):
     subplot_save("nosnore/images/pcp_results/%02d_pcp_snore.png" % (i+1))
 
     logging.info("Saved signal chunk %02d" % (i+1))
+
+sqdb.close()
