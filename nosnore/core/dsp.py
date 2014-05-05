@@ -4,8 +4,19 @@ from math import factorial
 import numpy as np
 import pylab as pl
 from obspy.signal import envelope
+from scipy.signal import butter, filtfilt
 
 
+def lowpass(signal, rate, cutoff):
+    """Apply lowpass filter
+
+    :param signal: numpy 1D array values of a signal
+    :param rate: int sampling rate of the signal
+    :param cutoff: int cutoff frequency 
+    :return: numpy 1D array of filtered values
+    """
+    b, a = butter(2, cutoff/(rate/2.0), btype='low', analog=0, output='ba')
+    return filtfilt(b, a, signal)
 FFT = namedtuple('FFT', 'freqs power')
 
 
