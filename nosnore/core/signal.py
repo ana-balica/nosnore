@@ -7,6 +7,10 @@ def getwavdata(filename):
     return wavfile.read(filename)
 
 
+def savewavdata(filename, rate, data):
+    wavfile.write(filename, rate, data)
+
+
 class Signal(object):
     def __init__(self, signal, time):
         self._signal = signal
