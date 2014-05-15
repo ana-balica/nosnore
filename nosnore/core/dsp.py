@@ -20,6 +20,10 @@ def lowpass(signal, rate, cutoff):
 FFT = namedtuple('FFT', 'freqs power')
 
 
+def normalize(signal):
+    return (signal - np.mean(signal, axis=0))/np.std(signal, axis=0)
+
+
 def autocorrelate(signal):
     """Perform autocorrelation on the signal using FFT
 
