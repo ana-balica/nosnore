@@ -1,10 +1,10 @@
-from collections import namedtuple
 from math import factorial
 
 import numpy as np
 import pylab as pl
 from obspy.signal import envelope
 from scipy.signal import butter, filtfilt
+from matplotlib.mlab import psd as psd_welch
 
 
 def lowpass(signal, rate, cutoff):
@@ -17,7 +17,6 @@ def lowpass(signal, rate, cutoff):
     """
     b, a = butter(2, cutoff/(rate/2.0), btype='low', analog=0, output='ba')
     return filtfilt(b, a, signal)
-FFT = namedtuple('FFT', 'freqs power')
 
 
 def normalize(signal):
@@ -33,21 +32,19 @@ def autocorrelate(signal):
     freqs = np.fft.rfft(signal)
     auto = freqs * np.conj(freqs)
     return np.fft.irfft(auto)
-    
 
-def psd(signal, time):
-    """Compute Power Spectral Density
+
+def psd(signal, rate):
+    """Compute Power Spectral Density. Wrapper around matplotlib.mlab.psd which 
+    computed PSD using Welch's average periodogram method with a block of 1024
+    points for the FFT.
+    More details - http://matplotlib.org/api/mlab_api.html#matplotlib.mlab.psd
 
     :param signal: numpy 1D array values of the time varying signal
-    :param time: numpy 1D array time
-    :return: numpy 1D array power spectral density
+    :param rate: sampling frequency of the signal
+    :return: tuple (Pxx, freqs) meaning the magnitutes and the associated frequencies to them
     """
-    size = signal.size
-    datafft = np.fft.rfft(signal*np.hanning(size))
-    datafft = abs(datafft)
-    datafft = 10*np.log10(datafft)
-    freqs = np.fft.fftfreq(size, time[1]-time[0])
-    return FFT(freqs[:datafft.size-1], datafft[:-1])
+    return psd_welch(signal, NFFT=2048, Fs=rate, scale_by_freq=True)
 
 
 def envelope(signal):
