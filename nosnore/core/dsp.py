@@ -56,40 +56,6 @@ def envelope(signal):
     return envelope(signal)
 
 
-def smooth(signal, window_size, order, deriv=0, rate=1):
-    """Perform smoothing on the signal using Savitsky Golay Filtering
-    Original source - http://wiki.scipy.org/Cookbook/SavitzkyGolay
-
-    :param signal: numpy 1D array values of the time varying signal
-    :param window_size: odd int length of the window
-    :param order: int order of the polynomial used in the filtering 
-    :param deriv: int order of the derivative to compute (default = 0 means only smoothing)
-    :param rate: int rate
-    :return: numpy 1D array smoothed signal varying in time
-    """
-    try:
-        window_size = np.abs(np.int(window_size))
-        order = np.abs(np.int(order))
-    except ValueError, msg:
-        raise ValueError("Window_size and order have to be of type int")
-    if window_size % 2 != 1 or window_size < 1:
-        raise TypeError("Window_size size must be a positive odd number")
-    if window_size < order + 2:
-        raise TypeError("window_size is too small for the polynomials order")
-
-    order_range = range(order+1)
-    half_window = (window_size -1) // 2
-    # precompute coefficients
-    b = np.mat([[k**i for i in order_range] for k in range(-half_window, half_window+1)])
-    m = np.linalg.pinv(b).A[deriv] * rate**deriv * factorial(deriv)
-    # pad the signal at the extremes with
-    # values taken from the signal itself
-    firstvals = signal[0] - np.abs( signal[1:half_window+1][::-1] - signal[0] )
-    lastvals = signal[-1] + np.abs(signal[-half_window-1:-1][::-1] - signal[-1])
-    signal = np.concatenate((firstvals, signal, lastvals))
-    return np.convolve( m[::-1], signal, mode='valid')
-
-
 def detect_formants(y_axis, x_axis=None, lookahead = 200, delta=0):
     """Detect formants (peaks) in a vector.
     A point will be considered a formant if it has the maximal or minimal value 
