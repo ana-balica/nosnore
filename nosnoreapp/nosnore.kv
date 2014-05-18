@@ -1,0 +1,12 @@
+#:kivy 1.8.0
+#:set white (1, 1, 1)
+
+<MainScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        canvas:
+            Color:
+                rgb: white
+            Rectangle:
+                pos: self.pos
+                size: self.size
