@@ -1,17 +1,15 @@
 from kivy.app import App
 from kivy.config import Config
-from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition
+from kivy.uix.tabbedpanel import TabbedPanel
 
 
-class MainScreen(Screen):
+class Panel(TabbedPanel):
     pass
 
 
 class NosnoreApp(App):
     def build(self):
-        self.manager = ScreenManager(transition=NoTransition())
-        self.manager.add_widget(MainScreen(name='menu'))
-        return self.manager
+        return Panel()
 
 
 if __name__ == '__main__':

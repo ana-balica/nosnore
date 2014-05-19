@@ -1,12 +1,39 @@
 #:kivy 1.8.0
 #:set white (1, 1, 1)
 
-<MainScreen>:
-    BoxLayout:
-        orientation: "vertical"
-        canvas:
-            Color:
-                rgb: white
-            Rectangle:
-                pos: self.pos
-                size: self.size
+<TabbedPanelStrip>
+    canvas:
+        Color:
+            rgba: white
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+
+<WhiteBoxLayout@BoxLayout>:
+    orientation: "vertical"
+    canvas:
+        Color:
+            rgb: white 
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<Panel>:
+    tab_pos: 'top_mid'
+    do_default_tab: False
+    TabbedPanelItem:
+        text: "Sleep time"
+        WhiteBoxLayout:
+
+
+    TabbedPanelItem:
+        text: "Statistics"
+        WhiteBoxLayout:
+
+
+    TabbedPanelItem:
+        text: "Settings"
+        WhiteBoxLayout:
+        
