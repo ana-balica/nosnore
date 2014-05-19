@@ -51,3 +51,6 @@ nosnore/samples/*
 
 # Resulting data
 data/
+
+# Buildozer built
+.buildozer
