@@ -46,8 +46,7 @@ nosnore/articles/*
 nosnore/samples/*
 
 # Generated images
-*.png
-*.jpg
+nosnore/images/*
 
 # Resulting data
 data/
