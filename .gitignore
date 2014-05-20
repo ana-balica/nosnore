@@ -54,3 +54,10 @@ data/
 
 # Buildozer built
 .buildozer
+
+# Latex
+thesis/*.pdf
+thesis/*.aux
+thesis/*.toc
+thesis/*.log
+thesis/*.backup
