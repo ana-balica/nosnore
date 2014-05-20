@@ -47,6 +47,19 @@ def psd(signal, rate):
     return psd_welch(signal, NFFT=4096, Fs=rate, scale_by_freq=True)
 
 
+def trim_psd(mags, freqs):
+    """Clean up the Power Spectral Density by stripping low values from the back
+
+    :param mags: numpy 1D array magnitudes
+    :param freqs: numpy 1D array frequencies
+    :return: tuple (mags, freqs) meaning the magnitudes and the associated frequencies to them
+    """
+    threshold = 0.1
+    mags[mags < threshold] = 0
+    new_mags = np.trim_zeros(mags, 'b')
+    return new_mags, freqs[:new_mags.size]
+
+
 def envelope(signal):
     """Extract the envelope of the signal
 
