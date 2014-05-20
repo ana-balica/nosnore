@@ -1,0 +1,70 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage{anysize}
+\marginsize{20mm}{10mm}{20mm}{20mm}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{verbatim}
+\usepackage[export]{adjustbox}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{titlesec}
+
+\titleformat{\chapter}[hang] 
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{1em}{} 
+
+\graphicspath{ {./imgs/} }
+\renewcommand*\contentsname{Table of contents}
+
+\onehalfspacing
+
+\begin{document}
+\pagestyle{plain}
+\renewcommand{\chaptername}{}
+
+\begin{singlespacing}
+\tableofcontents
+\end{singlespacing}
+
+
+\addcontentsline{toc}{chapter}{Introduction}
+\chapter*{Introduction}
+
+\chapter{System design}
+System design
+\section{UML modeling}
+
+\chapter{System Development}
+System Development
+\section{Implementation}
+\section{Deployment}
+\section{Testing}
+\section{Results}
+
+\chapter{Economic Analysis}
+Economic Analysis
+\section{Project description}
+\section{SWOT analysis}
+\section{Project time schedule}
+\subsection{Objective determination}
+\subsection{Time schedule establishment}
+\section{Economic motivation}
+\subsection{Tangible and intangible asset expenses}
+\subsection{Salary expenses}
+\subsection{Individual person salary}
+\subsection{Wear and depreciation}
+\subsection{Product cost}
+\subsection{Economic indicators and results}
+\section{Economic conclusions}
+
+\addcontentsline{toc}{chapter}{Conclusions}
+\chapter*{Conclusions}
+Conclusions
+
+\addcontentsline{toc}{chapter}{References}
+\chapter*{References}
+References
+
+\end{document}
