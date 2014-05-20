@@ -42,7 +42,7 @@ def psd(signal, rate):
 
     :param signal: numpy 1D array values of the time varying signal
     :param rate: sampling frequency of the signal
-    :return: tuple (Pxx, freqs) meaning the magnitutes and the associated frequencies to them
+    :return: tuple (Pxx, freqs) meaning the magnitudes and the associated frequencies to them
     """
     return psd_welch(signal, NFFT=2048, Fs=rate, scale_by_freq=True)
 
