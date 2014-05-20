@@ -44,7 +44,7 @@ def psd(signal, rate):
     :param rate: sampling frequency of the signal
     :return: tuple (Pxx, freqs) meaning the magnitudes and the associated frequencies to them
     """
-    return psd_welch(signal, NFFT=2048, Fs=rate, scale_by_freq=True)
+    return psd_welch(signal, NFFT=4096, Fs=rate, scale_by_freq=True)
 
 
 def envelope(signal):
