@@ -74,7 +74,6 @@ class SnoreDatabase(object):
             query = query.format(", binarea%i{0}" % (i+1))
 
         query = query.replace("{0}", "")
-        print query
         self.db.execute(query)
         return self
 
