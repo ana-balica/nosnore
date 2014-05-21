@@ -52,3 +52,43 @@ class SqliteDatabase(object):
         """Close the connection
         """
         self.conn.close()
+
+
+class SnoreDatabase(object):
+    """Snore features database
+    """
+    def __init__(self, name):
+        """Initialize a connection to a snore db
+        """
+        self.dbname = os.path.join(PROJECT_PATH, name)
+        self.db = SqliteDatabase(self.dbname)
+
+    def create_features_table(self, peaks_count, binareas_count):
+        """
+        """
+        query = """CREATE TABLE features (id integer primary key autoincrement, sid integer{0})"""
+        for i in xrange(peaks_count):
+            query = query.format(", peak%i_mag real, peak%i_freq real{0}" % (i+1, i+1))
+
+        for i in xrange(binareas_count):
+            query = query.format(", binarea%i{0}" % (i+1))
+
+        query = query.replace("{0}", "")
+        print query
+        self.db.execute(query)
+        return self
+
+    def insert_signal_features(self, sid, peaks, binareas):
+        """
+        """
+        columns = len(peaks)*2 + len(binareas)
+        query = """INSERT INTO features VALUES (Null, {0}{1})""".format(sid, ", ?"*columns)
+        params = []
+        for peak in peaks:
+            params.append(peak[0])
+            params.append(peak[1])
+        for bin in binareas:
+            params.append(bin)
+        params = tuple(params)
+        self.db.execute(query, params)
+        return self
