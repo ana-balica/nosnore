@@ -5,62 +5,37 @@ import pprint
 
 import numpy as np
 import pylab as pl
-from nosnore.core.dsp import autocorrelate, psd, smooth, detect_formants
-from nosnore.core.signal import getwavdata, Signal
+from nosnore.core.dsp import *
+from nosnore.core.signal import getwavdata, savewavdata, Signal
 from nosnore.core.plot import subplot_start, subplot_continue, subplot_save, show_plot, save_plot_points
-from nosnore.io.db import SqliteDatabase
+from nosnore.io.db import SnoreDatabase
 
 from nosnore import log
 logging = log.getLogger(__name__)
-
-sqdb = SqliteDatabase("test_pcp_formants.db")
-sqdb.execute("""CREATE TABLE formants (id integer primary key autoincrement, sid integer, 
-                frequency real, power real)""", commit=True)
-
-CHUNK_SIZE = 70000
-
 pp = pprint.PrettyPrinter(indent=4)
-f = "nosnore/samples/cvut/01pcp_data.wav"
 
-rate, data = getwavdata(f)
-n = data.size
-time = np.linspace(0, n/rate, num=n)
-logging.info("Signal loaded with size {0}".format(n))
+db = SnoreDatabase("test_pcp_features.db")
+db.create_features_table(7, 20)
 
-signal_main = Signal(data, time)
-chunks = signal_main.split(CHUNK_SIZE)
-logging.info("Signal split in {0} chunks".format(len(chunks)))
-logging.info("Will process only 10 of them for testing purposes...")
+filename_template = "nosnore/samples/cvut/short/%02d_pcp_snore.wav"
 
-chunks = chunks[:10]
+for i in xrange(20):
+    logging.info("Signal chunk %02d" % (i+1))
+    rate, data = getwavdata(filename_template % (i+1))
+    n = data.size
+    time = np.linspace(0, n/rate, num=n)
+    signal = Signal(data, time)
+    fsignal = lowpass(signal.signal, rate, 500)
 
-for i, chunk in enumerate(chunks):
-    short_time = time[:chunk.size]
-    signal = Signal(chunk, short_time)
-    autocorr_sig = autocorrelate(signal.signal)
-    psd_sig = psd(autocorr_sig, short_time)
-    smoothed = smooth(psd_sig[1], window_size=81, order=4)
-    for _ in xrange(20):
-        smoothed = smooth(smoothed, window_size=81, order=4)
+    normalized = normalize(fsignal)
+    auto_sig = autocorrelate(normalized)
+    mags, freqs = psd(auto_sig, rate)
+    peak_features = extract_local_maxima(mags, freqs)
+    area_features = get_bin_areas(mags, freqs, 40)
 
-    logging.info("Formants for signal %02d" % (i+1))
-    maxtab, mintab = detect_formants(smoothed, psd_sig[0], delta=15)
+    logging.info("Extracted {0} peak features".format(len(peak_features)))
+    logging.info("Extracted {0} bin area features".format(len(area_features)))
 
-    formants = []
-    for peak in maxtab:
-        formants.append((str(i+1), str(peak[0]), str(peak[1])))
+    db.insert_signal_features(str(i+1), peak_features, area_features)
 
-    sqdb.executemany("INSERT INTO formants VALUES (NULL, ?, ?, ?)", formants)
-
-    save_plot_points((psd_sig[0], smoothed), (xm, ym), 
-                     "nosnore/images/pcp_results/%02d_pcp_snore_formants.png" % (i+1))
-
-    subplot_start()
-    subplot_continue(311, signal.signal, signal.time)
-    subplot_continue(312, psd_sig[1], psd_sig[0])
-    subplot_continue(313, smoothed, psd_sig[0])
-    subplot_save("nosnore/images/pcp_results/%02d_pcp_snore.png" % (i+1))
-
-    logging.info("Saved signal chunk %02d" % (i+1))
-
-sqdb.close()
+db.db.close()
