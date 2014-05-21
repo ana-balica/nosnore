@@ -64,7 +64,11 @@ class SnoreDatabase(object):
         self.db = SqliteDatabase(self.dbname)
 
     def create_features_table(self, peaks_count, binareas_count):
-        """
+        """Create a schema of features table
+
+        :param peaks_count: int number of total peaks
+        :param binareas_count: int number of bins
+        :return: the current instance
         """
         query = """CREATE TABLE features (id integer primary key autoincrement, sid integer{0})"""
         for i in xrange(peaks_count):
@@ -78,7 +82,10 @@ class SnoreDatabase(object):
         return self
 
     def insert_signal_features(self, sid, peaks, binareas):
-        """
+        """Insert a tuple of features into features table
+
+        :param sid: int signal id
+        :param peaks: list of tuples (local_max_magniture, local_max_frequency)
         """
         columns = len(peaks)*2 + len(binareas)
         query = """INSERT INTO features VALUES (Null, {0}{1})""".format(sid, ", ?"*columns)
