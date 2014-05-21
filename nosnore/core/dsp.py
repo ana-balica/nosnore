@@ -88,7 +88,7 @@ def extract_local_maxima(mags, freqs):
     return local_maximas
 
 
-def get_bin_areas(mags, freqs, window):
+def get_bin_areas(mags, freqs, window, limit=50):
     """Extract the area of integrating using composite trapezoidal rule
 
     :param mags: numpy 1D array magnitudes
@@ -101,6 +101,8 @@ def get_bin_areas(mags, freqs, window):
     bin_freqs = freqs[0:window]
     j = 0
     for i in xrange(bins):
+        if i == limit:
+            break
         try:
             bin_areas.extend([np.trapz(mags[j:j+window], x=bin_freqs)])
         except IndexError:
