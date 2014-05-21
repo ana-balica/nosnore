@@ -5,21 +5,20 @@ import pprint
 
 import numpy as np
 import pylab as pl
-from nosnore.core.dsp import autocorrelate, psd, smooth, detect_formants
-from nosnore.core.signal import getwavdata, Signal
+from nosnore.core.dsp import *
+from nosnore.core.signal import getwavdata, savewavdata, Signal
 from nosnore.core.plot import subplot_start, subplot_continue, subplot_save, show_plot, save_plot_points
-from nosnore.io.db import SqliteDatabase
+from nosnore.io.db import SnoreDatabase
 
-from nosnore import log
-logging = log.getLogger(__name__)
+import logging
+logging.basicConfig(filename='pcp_worker.log',level=logging.DEBUG)
 
-sqdb = SqliteDatabase("pcp_formants.db")
-sqdb.execute("""CREATE TABLE formants (id integer primary key autoincrement, sid integer, 
-                frequency real, power real)""", commit=True)
+
+db = SnoreDatabase("pcp_features.db")
+db.create_features_table(7, 20)
 
 CHUNK_SIZE = 70000
 
-pp = pprint.PrettyPrinter(indent=4)
 files = ["nosnore/samples/cvut/01pcp_data.wav",
          "nosnore/samples/cvut/02pcp_data.wav",
          "nosnore/samples/cvut/03pcp_data.wav",
@@ -29,6 +28,7 @@ files = ["nosnore/samples/cvut/01pcp_data.wav",
 
 last = 0
 for f in files:
+    logging.info("Processing signal `{0}`".format(f))
     rate, data = getwavdata(f)
     n = data.size
     time = np.linspace(0, n/rate, num=n)
@@ -42,20 +42,20 @@ for f in files:
     for index, chunk in enumerate(chunks):
         i = last + index
         short_time = time[:chunk.size]
+
         signal = Signal(chunk, short_time)
-        autocorr_sig = autocorrelate(signal.signal)
-        psd_sig = psd(autocorr_sig, short_time)
-        smoothed = smooth(psd_sig[1], window_size=81, order=4)
-        for _ in xrange(20):
-            smoothed = smooth(smoothed, window_size=81, order=4)
-        maxtab, mintab = detect_formants(smoothed, psd_sig[0], delta=15)
+        fsignal = lowpass(signal.signal, rate, 500)
 
-        formants = []
-        for peak in maxtab:
-            formants.append((str(i+1), str(peak[0]), str(peak[1])))
+        normalized = normalize(fsignal)
+        auto_sig = autocorrelate(normalized)
+        mags, freqs = psd(auto_sig, rate)
+        peak_features = extract_local_maxima(mags, freqs)
+        area_features = get_bin_areas(mags, freqs, 40)
 
-        sqdb.executemany("INSERT INTO formants VALUES (NULL, ?, ?, ?)", formants)
-        logging.info("Processed %02d" % (i+1))
+        logging.info("Extracted {0} peak features".format(len(peak_features)))
+        logging.info("Extracted {0} bin area features".format(len(area_features)))
+
+        db.insert_signal_features(str(i+1), peak_features, area_features)
     last = i+1
 
-sqdb.close()
+db.db.close()
