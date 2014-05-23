@@ -219,7 +219,67 @@ Those have been all the popular and most common ways to treat sleep apnea disord
 
 \section{Theoretical Analysis}
 \subsection{Digital signal processing of snore sounds}
-\subsection{Supervised learning of snoring using Support Vector Machines}
+Digital signal processing (further used as DSP) represents a very important part in signal analysis. Since the major goal is to develop an automated method for snore detection, digital signal processing becomes critical for correct computations. Roughly it might be considered a preprocessing phase in snore recognition, which is applied before feature extraction and machine learning. 
+
+DSP is the mathematical manipulation of signal information represented in discrete domain: time, frequency. One type of such signal represents the sound of which we are particularly interested. Generally the aim of DSP is to improve the accuracy and reliability of discrete signals by eliminating or diminishing noise.
+
+For the sake of clarity there will be presented a simple signal to which all the relevant digital processing algorithms will be applied. Afterwards the whole process will be examined on a real snore recording. 
+
+First it is necessary to generate a sample wave. For the matter of simplicity the signal is generated using 2 sine waves. The result is displayed in Figure \ref{fig:sines}. The lower plot shows the same signal as on the upper plot, plus some random normally distributed noise. Further we will use the noisy data to do preprocessing.
+
+\[
+ y(t) = \sin(2\pi 0.05 x) + 3\sin(2\pi 0.09 x)
+\]
+
+
+\begin{figure}[h]
+\centering
+  \includegraphics[max height=\textheight, max width=\textwidth, keepaspectratio, scale=0.7]{07_sine_wave.png}
+\caption{Sample sine waves with and without noise}
+\label{fig:sines}
+\end{figure}
+
+The most common way to improve the quality of a signal is to use digital filtering. It mainly consists of mathematical manipulations of a number of adjacent samples to a current sample. In preprocessing phase a low-pass filter is being used. It attenuates the high frequencies and passes low frequencies, hence the name. It is characterized by the cut-off frequency, which should be specified explicitly for each signal. Low-pass filtering will make the signal appear smoother by removing short-term fluctuations. 
+
+In our case the low-pass filter is implemented using Butterworth filter -- it has maximally flat frequency response in the passband. For low-pass filtering second order of 'lowpass' type filter is created. For the signal generated earlier the cutoff frequency is $10$. The results of filtering can be viewed in Figure \ref{fig:lowpass}.
+
+\begin{figure}[h]
+\centering
+  \includegraphics[max height=\textheight, max width=\textwidth, keepaspectratio, scale=0.7]{08_lowpass.png}
+\caption{Sine wave with noise before and after low-pass filtering}
+\label{fig:lowpass}
+\end{figure}
+
+From the resulted data, it is easy to see that signal becomes smoother and doesn't contains high frequencies. Mathematically and intuitively it gives a good-enough result. 
+
+The next step is to perform normalization. Normalization is computed using standard deviation.
+
+\[
+ x = \frac{x - mean(x)}{deviation(x)}
+\]
+
+Consequently the signal wave is normalized and can be viewed in Figure \ref{fig:normalized}.
+
+\begin{figure}[h]
+\centering
+  \includegraphics[max height=\textheight, max width=\textwidth, keepaspectratio, scale=0.7]{09_normalized.png}
+\caption{Sample sine wave normalized}
+\label{fig:normalized}
+\end{figure}
+
+The best way to identify the missing fundamental frequency in a signal is to perform autocorrelation. Autocorrelation is a cross-correlation of a signal with itself. Mainly the autocorrelation yields repeating events from a signal. One of the most computationally cheap ways to compute autocorrelation is perform the inverse Fourier transform of the product of the discrete Fourier transform with the conjugate of the previously computed Fourier transform. Discrete Fourier transforms can be performed using FastFFT algorithm. 
+
+\begin{figure}[h]
+\centering
+  \includegraphics[max height=\textheight, max width=\textwidth, keepaspectratio, scale=0.7]{10_autocorrelation.png}
+\caption{The autocorrelation of the sine wave}
+\label{fig:autocorrelation}
+\end{figure}
+
+
+% insert generated example
+
+\subsection{Feature extraction and supervised learning}
 
 
 \chapter{System design}
