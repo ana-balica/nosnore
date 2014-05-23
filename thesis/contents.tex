@@ -218,18 +218,20 @@ Some of those surgeries can be conducted using Radiofrequency ablation (RFA). It
 Those have been all the popular and most common ways to treat sleep apnea disorder. Neither of them gives absolute guarantee for a apnea-free life, but there exists a choice to make between invasive and non-invasive solutions. 
 
 \section{Theoretical Analysis}
-\subsection{Digital signal processing of snore sounds}
-Digital signal processing (further used as DSP) represents a very important part in signal analysis. Since the major goal is to develop an automated method for snore detection, digital signal processing becomes critical for correct computations. Roughly it might be considered a preprocessing phase in snore recognition, which is applied before feature extraction and machine learning. 
+\subsection{Digital signal processing}
+In the context of communication everything is a wave. This is the starting point to understanding that everything travels as a wave and can be represented graphically. Signals can be analog and discrete. Discrete-time signals consist of sequences of quantities. In case it is obtained from a continuous-time signal it is characterized by a sampling rate. The process of analog to digital conversion consists of 2 step process: quantization and discretization. If both time series and the amplitude of a signal were discretized, then it is a digital signal.
+
+Digital signal processing (further used as DSP) represents a very important part in signal analysis. Since the major goal of this thesis is to develop an automated method for snore detection, digital signal processing becomes critical for correct computations. Roughly it might be considered a preprocessing phase in snore recognition, which is applied before feature extraction and machine learning. 
 
 DSP is the mathematical manipulation of signal information represented in discrete domain: time, frequency. One type of such signal represents the sound of which we are particularly interested. Generally the aim of DSP is to improve the accuracy and reliability of discrete signals by eliminating or diminishing noise.
 
-For the sake of clarity there will be presented a simple signal to which all the relevant digital processing algorithms will be applied. Afterwards the whole process will be examined on a real snore recording. 
+For the sake of clarity there will be presented a simple signal to which all the relevant digital processing algorithms will be applied.
 
-First it is necessary to generate a sample wave. For the matter of simplicity the signal is generated using 2 sine waves. The result is displayed in Figure \ref{fig:sines}. The lower plot shows the same signal as on the upper plot, plus some random normally distributed noise. Further we will use the noisy data to do preprocessing.
+First it is necessary to generate a sample wave. For the matter of simplicity the signal is generated using 2 sine waves as shown in Formula \eqref{eq:sample_sine}. The result is displayed in Figure \ref{fig:sines}. The lower plot shows the same signal as on the upper plot, plus some random normally distributed noise. Further we will use the noisy data to do preprocessing.
 
-\[
+\begin{equation} \label{eq:sample_sine}
  y(t) = \sin(2\pi 0.05 x) + 3\sin(2\pi 0.09 x)
-\]
+\end{equation}
 
 
 \begin{figure}[h]
@@ -239,9 +241,9 @@ First it is necessary to generate a sample wave. For the matter of simplicity th
 \label{fig:sines}
 \end{figure}
 
-The most common way to improve the quality of a signal is to use digital filtering. It mainly consists of mathematical manipulations of a number of adjacent samples to a current sample. In preprocessing phase a low-pass filter is being used. It attenuates the high frequencies and passes low frequencies, hence the name. It is characterized by the cut-off frequency, which should be specified explicitly for each signal. Low-pass filtering will make the signal appear smoother by removing short-term fluctuations. 
+The most common way to improve the quality of a signal is to use digital filtering. It mainly consists of mathematical manipulations of a number of adjacent samples to a current sample. In preprocessing phase a low-pass filter is being used. It attenuates the high frequencies and passes low frequencies. It is characterized by the cut-off frequency, which should be specified explicitly for each signal. Low-pass filtering will make the signal appear smoother by removing short-term fluctuations. 
 
-In our case the low-pass filter is implemented using Butterworth filter -- it has maximally flat frequency response in the passband. For low-pass filtering second order of 'lowpass' type filter is created. For the signal generated earlier the cutoff frequency is $10$. The results of filtering can be viewed in Figure \ref{fig:lowpass}.
+In this particular case the low-pass filter is implemented using Butterworth filter -- it has maximally flat frequency response in the passband. For low-pass filtering second order of 'lowpass' type filter is created. For the signal generated earlier the cutoff frequency is $10$. The results of filtering can be viewed in Figure \ref{fig:lowpass}.
 
 \begin{figure}[h]
 \centering
@@ -252,13 +254,15 @@ In our case the low-pass filter is implemented using Butterworth filter -- it ha
 
 From the resulted data, it is easy to see that signal becomes smoother and doesn't contains high frequencies. Mathematically and intuitively it gives a good-enough result. 
 
-The next step is to perform normalization. Normalization is computed using standard deviation.
+The next step is to perform normalization \eqref{eq:normalization}.
 
-\[
- x = \frac{x - mean(x)}{deviation(x)}
-\]
+\begin{equation} \label{eq:normalization}
+ x = \frac{x - \overline{x}}{\sigma}
+\end{equation}
 
-Consequently the signal wave is normalized and can be viewed in Figure \ref{fig:normalized}.
+where $\overline{x}$ represents the arithmetic mean and $\sigma$ is the standard deviation. 
+
+Consequently the signal wave is normalized and an example of normalization can be viewed in Figure \ref{fig:normalized}.
 
 \begin{figure}[h]
 \centering
@@ -267,7 +271,13 @@ Consequently the signal wave is normalized and can be viewed in Figure \ref{fig:
 \label{fig:normalized}
 \end{figure}
 
-The best way to identify the missing fundamental frequency in a signal is to perform autocorrelation. Autocorrelation is a cross-correlation of a signal with itself. Mainly the autocorrelation yields repeating events from a signal. One of the most computationally cheap ways to compute autocorrelation is perform the inverse Fourier transform of the product of the discrete Fourier transform with the conjugate of the previously computed Fourier transform. Discrete Fourier transforms can be performed using FastFFT algorithm. 
+The best way to identify the missing fundamental frequency in a signal is to perform autocorrelation. Autocorrelation is a cross-correlation of a signal with itself. Mainly the autocorrelation yields repeating events from a signal. By definition for discrete time signal $x_n$ at time lag $j$, autocorrelation $R$ is
+
+\begin{equation}
+ R_{xx}(j) = \sum_{n}x_n\overline{x}_{n-j}
+\end{equation}
+
+Nevertheless one of the most computationally cheap ways to perform autocorrelation is do the inverse Fourier transform of the product of the discrete Fourier transform with the conjugate of the previously computed Fourier transform. Discrete Fourier transforms can be performed using FastFFT algorithm.
 
 \begin{figure}[h]
 \centering
@@ -275,6 +285,8 @@ The best way to identify the missing fundamental frequency in a signal is to per
 \caption{The autocorrelation of the sine wave}
 \label{fig:autocorrelation}
 \end{figure}
+
+All the manipulations performed till this point were done in time domain. In time domain one can see the changes that happen to a signal over time, whereas in frequency domain one can observe how much of the signal lies within each frequency band over a range of frequencies. Normally signals can be converted from one domain to the other using transformations like Fourier series, Fourier transform, Laplace Transform, Z transform. 
 
 
 % insert generated example
