@@ -11,6 +11,7 @@
 \usepackage{graphicx}
 \usepackage{setspace}
 \usepackage{titlesec}
+\usepackage{epstopdf}
 
 \titleformat{\chapter}[hang] 
 {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{1em}{} 
@@ -243,7 +244,7 @@ First it is necessary to generate a sample wave. For the matter of simplicity th
 
 The most common way to improve the quality of a signal is to use digital filtering. It mainly consists of mathematical manipulations of a number of adjacent samples to a current sample. In preprocessing phase a low-pass filter is being used. It attenuates the high frequencies and passes low frequencies. It is characterized by the cut-off frequency, which should be specified explicitly for each signal. Low-pass filtering will make the signal appear smoother by removing short-term fluctuations. 
 
-In this particular case the low-pass filter is implemented using Butterworth filter -- it has maximally flat frequency response in the passband. For low-pass filtering second order of 'lowpass' type filter is created. For the signal generated earlier the cutoff frequency is $10$. The results of filtering can be viewed in Figure \ref{fig:lowpass}.
+In this particular case the low-pass filter is implemented using Butterworth filter -- it has maximally flat frequency response in the passband. Butterworth filter introduces a phase shift between the original and filtered signal. In digital implementation the lag can be ignored, because the filtering happens twice, once forward and once backward. Second order 'lowpass' type filter is created for filtering the signal in this particular case. For the signal generated earlier the cutoff frequency is $10$. The results of filtering can be viewed in Figure \ref{fig:lowpass}.
 
 \begin{figure}[h]
 \centering
@@ -288,8 +289,26 @@ Nevertheless one of the most computationally cheap ways to perform autocorrelati
 
 All the manipulations performed till this point were done in time domain. In time domain one can see the changes that happen to a signal over time, whereas in frequency domain one can observe how much of the signal lies within each frequency band over a range of frequencies. Normally signals can be converted from one domain to the other using transformations like Fourier series, Fourier transform, Laplace Transform, Z transform. 
 
+As previously mentioned Fourier transform performs a mathematical transformation from time to frequency domain and vice-versa. In engineering FFT (Fast Fourier Transform) algorithm is used widely due to its rapid computations. It factorizes the DFT (Discrete Fourier Transform) matrix into a product of sparse factors.  The DFT is defined by the Formula \eqref{eq:dft}.
 
-% insert generated example
+\begin{equation} \label{eq:dft}
+ X_k = \sum_{n=0}^{N-1} x_n e^{-i2\pi k\frac{n}{N}}, \qquad k= 0,\ldots , N-1
+\end{equation}
+
+Equation \eqref{eq:dft} has $O(N^2)$ complexity. In comparison, all known FFT algorithms require $\Theta (N \log N)$ operations, which represents a major improve in speed. FFT can also be used in computing Power Spectral Density (further used as PSD).
+
+PSD shows how the variance of data is distributed over the frequency domain and represents a very useful tool to identify oscillatory signals in time series. On $x$ axis it represents the signal frequencies and on $y$ axis the amplitude. 
+
+\begin{figure}[h]
+\centering
+  \includegraphics[max height=\textheight, max width=\textwidth, keepaspectratio, scale=0.7]{11_psd.eps}
+\caption{Power Spectral Density of the signal}
+\label{fig:psd}
+\end{figure}
+
+In Figure \ref{fig:psd} it is clearly seen a peak at about $0.05$ and a nearby point at $0.09$. Both points represent the initial frequencies that we used to generated the signal. 
+
+To conclude DSP offered a variety of tools and algorithms to manipulate the initial noisy signal in order to achieve a concise representation with the most relevant information.
 
 \subsection{Feature extraction and supervised learning}
 
