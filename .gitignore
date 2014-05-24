@@ -51,6 +51,9 @@ nosnore/images/*
 # Resulting data
 data/
 
+# Logs
+*.log
+
 # Buildozer built
 .buildozer
 
