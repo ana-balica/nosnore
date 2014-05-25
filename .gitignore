@@ -45,8 +45,9 @@ docs/_build/*
 nosnore/articles/*
 nosnore/samples/*
 
-# Generated images
+# Generated images and pdfs
 nosnore/images/*
+*.pdf
 
 # Resulting data
 data/
@@ -58,7 +59,6 @@ data/
 .buildozer
 
 # Latex
-thesis/*.pdf
 thesis/*.aux
 thesis/*.toc
 thesis/*.log
