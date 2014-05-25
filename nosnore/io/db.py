@@ -98,3 +98,10 @@ class SnoreDatabase(object):
         params = tuple(params)
         self.db.execute(query, params)
         return self
+
+    def get_features(self, limit=None):
+        query = "SELECT * FROM features"
+        if limit:
+            query += " LIMIT {0}".format(limit)
+        self.db.execute(query)
+        return self.db.fetch('all')
