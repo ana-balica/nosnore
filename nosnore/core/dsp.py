@@ -88,7 +88,7 @@ def extract_local_maxima(mags, freqs):
     return local_maximas
 
 
-def get_bin_areas(mags, freqs, window, limit=50):
+def get_bin_areas(mags, freqs, window, limit=20):
     """Extract the area of integrating using composite trapezoidal rule
 
     :param mags: numpy 1D array magnitudes
