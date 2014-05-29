@@ -3,6 +3,7 @@
 \marginsize{20mm}{10mm}{20mm}{20mm}
 
 \usepackage[utf8]{inputenc}
+\usepackage{array}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -20,6 +21,10 @@
 \renewcommand*\contentsname{Table of contents}
 
 \onehalfspacing
+
+% for increasing cells line height in a table
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{N}{@{}m{0pt}@{}}
 
 \begin{document}
 \pagestyle{plain}
@@ -325,12 +330,78 @@ System Development
 \section{Results}
 
 \chapter{Economic Analysis}
-Economic Analysis
 \section{Project description}
-\section{SWOT analysis}
+For the last several decades Information Technology has advanced like no other field in the history of humankind. The development of fast computers and optimized algorithms has opened a big field for medical appliances and analysis of medical data. Respectively big and small health problems can now be solved much easily. Sleep Apnea is a serious disorder, which should be addressed by everybody. Since the process of going through a polysomnographic test is a hideous technique, a lot of other ways of detecting Sleep Apnea are proposed. In a society where healthcare has one of the biggest priorities, it is reasonable to develop applications for detecting or solving health problems. Snoring issues are considered a nuisance and are gladly removed from one's life.
+
+From this perspective is it clear why a snore and Sleep Apnea detecting application is a very useful and desired one. It can be used both in professional medical field by experts that want to automate and help their patients get comfortable with solutions that they offer, and additionally it is a perfect choice for those who suspect health problems and wish to identify the heaviness of snoring. 
+
+As a cross-platform application it is flexible and easy to deploy on various platforms. Users of different ages with suspected snoring problems can run the application. It has a simple and intuitive interface. The application requires a device with a microphone -- this is so far the biggest requirement.
+
 \section{Project time schedule}
+For the accomplishment of a project it is necessary to establish a schedule. For the development of the snore detecting app, agile project management is applied to offer flexible and iterative method of designing the application. It goes in 5 stages: planning, research, development, testing and deployment. The steps are repetitive and incremental.
+
 \subsection{Objective determination}
+The main objective of the following project is to provide a complete and functioning application for snore detection. Otherwise without a finished product there is no profit. More to that, it is important to market the application and get exposed to a large audience in need. This can be done via medical institutions that can provide the software to their patients. Another way is to market oneself on platform-specific stores. Since it is not a common piece of software, it creates a very specific audience of users, the ones that have a real demand in snore recognition. 
+
+The other crucial objective is to be as precise as possible. Since it deals with one's health, it becomes no joke. Even though the application states its status of being not responsible for the results and advices it gives, it is still a big influence on one's health decisions. 
+
+To keep up with the latest trends and researches, it is also an essential objective to keep updated and provide enhancements to the software. The lifecycle of the application will require bugfixes, interface changes, feature implementations. All of that will help the system still be trendy and up-to-date on the market.
+
 \subsection{Time schedule establishment}
+As it was said above the project will iterate over 5 steps: planning, research, development, testing and deployment. Naturally as most of the IT projects, it is subdivided into smaller parts. Planning step isn't supposed take up a lot of time, since the requirements are flexible. Moreover due to the research part the design solutions can change over time and open up new perspectives. The process of development is being split up in smaller tasks that can be accomplished within a 2-5 day period. Total duration of the project is computed using Formula \eqref{eq:duration}.
+
+\begin{equation} \label{eq:duration}
+ Duration = StartDate - FinishDate + ReserveTime
+\end{equation}
+
+In table \ref{table:schedule} is presented the first iteration of the project schedule. It uses the following notations: 
+\begin{itemize}
+ \item PM -- project manager
+ \item SA -- system architect
+ \item SM -- sales manager
+ \item D -- developer
+\end{itemize}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{| M{1.5em} | M{14em} | M{4em} | M{7em} | M{10em} |N}
+\hline
+Nr & Activity Name & Duration & People involved & Comments &\\[14pt]
+\hline
+1 & Define the project concept and objectives & 5 days & PM, SA, SM, D & It is a common task &\\[14pt]
+\hline
+2 & Perform market analysis & 10 days & PM, SA & Will results into a document describing market analysis &\\[14pt]
+\hline
+3 & Analysis of the domain & 15 days & SA, D & Research of the recognition algorithms &\\[14pt]
+\hline
+4 & Write down requirements and specifications & 5 days & PM, SD, D & &\\[14pt]
+\hline
+5 & System design (UML) & 10 days & PM, SA, D & &\\[14pt]
+\hline
+6 & Database design & 3 days & PM, SA, D & Development database and end-user database schemes &\\[14pt]
+\hline
+7 & Preprocessing and learning part of the implementation & 30 days & PM, SA, D & &\\[14pt]
+\hline
+8 & End-user application development & 20 days & PM, SA, D, SM & &\\[14pt]
+\hline
+9 & Validation of results & 10 days & PM, SA, D, SM & &\\[14pt]
+\hline
+10 & Documentation & 5 days & D & &\\[14pt]
+\hline
+11 & Deployment and testing & 10 days & PM, SA, D & &\\[14pt]
+\hline
+12 & Active marketing & 5 days & SM & &\\[14pt]
+\hline
+13 & Total time to finish the system & 128 days & & &\\[14pt]
+\hline
+\end{tabular}
+\caption{Time schedule}
+\end{center}
+\label{table:schedule}
+\end{table}
+
+Table \ref{table:schedule} describes the activities that will occur during project development, who is involved into each process and how much time does it take to accomplish a task. Total amount of time spent on the following project is 128 days.
+
 \section{Economic motivation}
 \subsection{Tangible and intangible asset expenses}
 \subsection{Salary expenses}
