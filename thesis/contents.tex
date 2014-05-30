@@ -477,6 +477,54 @@ So the total amount of direct expenses represents
 \end{equation}
 
 \subsection{Salary expenses}
+The employees obviously should be paid accordingly. Hence this section is concerned about the salaries to employees and various funds that should be paid. The distribution of salaries is the following: project manager -- 350 lei, system architect -- 450 lei, sales manager -- 300 lei, developer -- 420 lei. Those expenses are introduces in Table \ref{table:salaries}.
+
+\begin{table}[!h]
+\begin{center}
+\begin{tabular}{| M{10em} | M{8em} | M{8em} | M{8em} |N}
+\hline
+\textbf{Employee} & \textbf{Work fund (days)} & \textbf{Salary per day (MDL)} & \textbf{Salary fund (MDL)}&\\[18pt]
+\hline
+Project Manager & 103 & 350 & 36050 &\\[14pt]
+\hline 
+System Architect & 108 & 450 & 48600 &\\[14pt]
+\hline
+Sales Manager & 40 & 300 & 12000 &\\[14pt]
+\hline
+Developer & 113 & 420 & 47460 &\\[14pt]
+\hline
+Total & & & 144110 &\\[14pt]
+\hline
+\end{tabular}
+\caption{Salary expenses}
+\end{center}
+\label{table:salaries}
+\end{table}
+
+Now by having computed all the salaries for the employees, it is time to compute how much to be paid to social services fund, medical insurance fund and the total work expenses by summing up all previous expenses. So the social service fund which is $23\%$ this year will be 
+
+\begin{equation}
+ FS = F_{re} \cdot T_{fs} = 144110 lei \cdot 23 \% = 33145.3 lei 	
+\end{equation}
+
+where $F_{re}$ is the salary expense fund and $T_{fs}$ is the social service tax approved each year.
+
+The medical insurance fund is computed as
+
+\begin{equation}
+ MI = F_{re} \cdot T_{mi} = 144110 lei \cdot 3.5 \% = 5043.85 lei
+\end{equation}
+
+where $T_{mi}$ is the mandatory medical insurance tax approved each year by law of medical insurance and this year it is $3.5\%$. 
+
+So now having computed social service tax and medical insurance tax, it is possible to compute total work expense fund as follows
+
+\begin{equation}
+ WEF = F_{re} + FS + MI = 144110 lei + 33145.3 lei + 5043.85 lei = 182299.15 lei
+\end{equation}
+
+where $WEF$ is the work expense fund, FS is the social fund and MI is the medical insurance fund. In that way the total work expense fund was computed. 
+
 \subsection{Individual person salary}
 \subsection{Wear and depreciation}
 \subsection{Product cost}
