@@ -599,6 +599,62 @@ Total & & & & & 1361 &\\[14pt]
 \end{table}
 
 \subsection{Wear and depreciation}
+Another important part of economic analysis is the computation of wear and depreciation. It is a well known fact that any product decreases its value with time. Depression will be computed uniformly for the whole project duration, so that there are no accountancy issues. In other words, if a product is planned for 3 years, it should be divided into 3 uniform parts according to each year. Straight line depreciation will be applied. Normally wear is computed regarding to the type of asset. The notebook and single-board computer are usable for a period of 3 years. Licenses will last for a single year. At first tangible and intangible assets are summed up and then the salvage costs of each of the items at the end of their period of use has to be subtracted:
+
+\begin{equation}
+ \begin{split}
+  Total Asset Value &= \sum_{} (AssetCost - Salvage Value) \\
+		    &= (10000 - 200) + (8500 - 200) + (600 - 200) + (600 - 200) +\\
+		    & + (5700 - 200) + (8400 - 200) \\
+		    &= 32600 lei
+ \end{split}
+\end{equation}
+
+In order to get the yearly wear, divide total asset value by the period of use of assets
+
+\begin{equation} \label{eq:wear}
+ \begin{split}
+  Wear Per Year &= Total Asset Value / Period Of Use \\
+                &= 32600 lei/3 years= 10866.66 lei
+ \end{split}
+\end{equation}
+
+Formula \eqref{eq:wear} included tangible assets which will last for 3 years and intangible assets which last only one year. The initial value of assets was
+
+\begin{equation}
+ InitialAssetValue = Tangible Assets + Intangible Assets = 19700 + 14100 = 33800 lei
+\end{equation}
+
+With all the information above it is possible to build the depreciation table, presented in Table \ref{table:depreciation}.
+
+\begin{table}[!h]
+\begin{center}
+\begin{tabular}{| M{10em} | M{10em} | M{10em} | M{10em}|N}
+\hline
+\textbf{Assets value at the beginning of year (MDL)} & \textbf{Depreciation expense per year (MDL)} & \textbf{Accumulated depreciation at the end of year (MDL)} & \textbf{Assets value at the end of year (MDL)} &\\[18pt]
+\hline
+33800 & 10866.66 & 10866.66 & 22933.34 &\\[14pt]
+\hline
+25520 & 10866.66 & 21733.33 & 12066.67 &\\[14pt]
+\hline
+17240 & 10866.66 & 32600 & 1200 &\\[14pt]
+\hline
+\end{tabular}
+\caption{Depreciation of assets}
+\label{table:depreciation}
+\end{center}
+\end{table}
+
+The project takes 128 days to be finish, respectively the wear value of the assets in this particular case should be
+
+\begin{equation}
+ \begin{split}
+  ProjectWearValue &= WearPerYear / DaysInYear \cdot ProjectDuration\\
+                   &= 10866.66 lei / 356 days \cdot 128 days = 3907.11 lei
+ \end{split}
+\end{equation}
+
+
 \subsection{Product cost}
 \subsection{Economic indicators and results}
 \section{Economic conclusions}
