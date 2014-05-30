@@ -13,6 +13,7 @@
 \usepackage{setspace}
 \usepackage{titlesec}
 \usepackage{epstopdf}
+\usepackage{tabularx}
 
 \titleformat{\chapter}[hang] 
 {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{1em}{} 
@@ -25,6 +26,7 @@
 % for increasing cells line height in a table
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
 \newcolumntype{N}{@{}m{0pt}@{}}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
 
 \begin{document}
 \pagestyle{plain}
@@ -364,7 +366,7 @@ In table \ref{table:schedule} is presented the first iteration of the project sc
 
 \begin{table}[!h]
 \begin{center}
-\begin{tabular}{| M{1.5em} | M{14em} | M{4em} | M{7em} | M{10em} |N}
+\begin{tabularx}{\textwidth}{| M{1.5em} | Y | Y | Y | Y |N}
 \hline
 \textbf{Nr} & \textbf{Activity Name} & \textbf{Duration} & \textbf{People involved} & \textbf{Comments} &\\[18pt]
 \hline
@@ -394,7 +396,7 @@ In table \ref{table:schedule} is presented the first iteration of the project sc
 \hline
 13 & Total time to finish the system & 128 days & & &\\[14pt]
 \hline
-\end{tabular}
+\end{tabularx}
 \caption{Time schedule}
 \label{table:schedule}
 \end{center}
@@ -410,7 +412,7 @@ The budget for the required assets is shown in Table \ref{table:tangible_assets}
 
 \begin{table}[!h]
 \begin{center}
-\begin{tabular}{| M{5em} | M{10em} | M{7em} | M{5em} | M{5em} | M{5em} |N}
+\begin{tabularx}{\textwidth}{| M{5em} | Y | M{7em} | M{5em} | M{5em} | M{5em} |N}
 \hline
 \textbf{Material} & \textbf{Specification} & \textbf{Measurement unit} & \textbf{Price per unit (MDL)} & \textbf{Quantity} & \textbf{Sum (MDL)} &\\[18pt]
 \hline
@@ -424,7 +426,7 @@ USB microphone & Logitech Labtec Microphone & Unit & 600 & 1 & 600 &\\[14pt]
 \hline
 Total & & & & & 19700 &\\[14pt]
 \hline
-\end{tabular}
+\end{tabularx}
 \caption{Tangible asset expenses}
 \label{table:tangible_assets}
 \end{center}
@@ -432,7 +434,7 @@ Total & & & & & 19700 &\\[14pt]
 
 \begin{table}[!h]
 \begin{center}
-\begin{tabular}{| M{5em} | M{10em} | M{7em} | M{5em} | M{5em} | M{5em} |N}
+\begin{tabularx}{\textwidth}{| M{5em} | Y | M{7em} | M{5em} | M{5em} | M{5em} |N}
 \hline
 \textbf{Material} & \textbf{Specification} & \textbf{Measurement unit} & \textbf{Price per unit (MDL)} & \textbf{Quantity} & \textbf{Sum (MDL)} &\\[18pt]
 \hline
@@ -442,7 +444,7 @@ License & PyCharm Commercial License & Unit & 2800 & 3 & 8400 &\\[14pt]
 \hline
 Total & & & & & 14100 &\\[14pt]
 \hline
-\end{tabular}
+\end{tabularx}
 \caption{Intangible asset expenses}
 \label{table:intangible_assets}
 \end{center}
@@ -450,7 +452,7 @@ Total & & & & & 14100 &\\[14pt]
 
 \begin{table}[!h]
 \begin{center}
-\begin{tabular}{| M{5em} | M{10em} | M{7em} | M{5em} | M{5em} | M{5em} |N}
+\begin{tabularx}{\textwidth}{| M{5em} | Y | M{7em} | M{5em} | M{5em} | M{5em} |N}
 \hline
 \textbf{Material} & \textbf{Specification} & \textbf{Measurement unit} & \textbf{Price per unit (MDL)} & \textbf{Quantity} & \textbf{Sum (MDL)} &\\[18pt]
 \hline
@@ -464,7 +466,7 @@ Pen & Blue pen & Unit & 3 & 3 & 9 &\\[14pt]
 \hline
 Total & & & & & 619 &\\[14pt]
 \hline
-\end{tabular}
+\end{tabularx}
 \caption{Direct expenses}
 \label{table:direct_expenses}
 \end{center}
@@ -481,7 +483,7 @@ The employees obviously should be paid accordingly. Hence this section is concer
 
 \begin{table}[!h]
 \begin{center}
-\begin{tabular}{| M{10em} | M{8em} | M{8em} | M{8em} |N}
+\begin{tabularx}{\textwidth}{| Y | M{8em} | M{8em} | M{8em} |N}
 \hline
 \textbf{Employee} & \textbf{Work fund (days)} & \textbf{Salary per day (MDL)} & \textbf{Salary fund (MDL)}&\\[18pt]
 \hline
@@ -495,7 +497,7 @@ Developer & 113 & 420 & 47460 &\\[14pt]
 \hline
 Total & & & 144110 &\\[14pt]
 \hline
-\end{tabular}
+\end{tabularx}
 \caption{Salary expenses}
 \label{table:salaries}
 \end{center}
@@ -578,7 +580,7 @@ The indirect expenses are things like electricity, Internet traffic, water, etc.
 
 \begin{table}[!h]
 \begin{center}
-\begin{tabular}{| M{5em} | M{10em} | M{7em} | M{5em} | M{5em} | M{5em} |N}
+\begin{tabularx}{\textwidth}{| M{5em} | Y | M{7em} | M{5em} | M{5em} | M{5em} |N}
 \hline
 \textbf{Material} & \textbf{Specification} & \textbf{Measurement unit} & \textbf{Price per unit (MDL)} & \textbf{Quantity} & \textbf{Sum (MDL)} &\\[18pt]
 \hline
@@ -592,7 +594,7 @@ Electricity & Union Fenosa & KWh & 1.10 & 250 & 275 &\\[14pt]
 \hline
 Total & & & & & 1361 &\\[14pt]
 \hline
-\end{tabular}
+\end{tabularx}
 \caption{Indirect expenses}
 \label{table:indirect_expenses}
 \end{center}
@@ -629,7 +631,7 @@ With all the information above it is possible to build the depreciation table, p
 
 \begin{table}[!h]
 \begin{center}
-\begin{tabular}{| M{10em} | M{10em} | M{10em} | M{10em}|N}
+\begin{tabularx}{\textwidth}{| Y | Y | Y | Y|N}
 \hline
 \textbf{Assets value at the beginning of year (MDL)} & \textbf{Depreciation expense per year (MDL)} & \textbf{Accumulated depreciation at the end of year (MDL)} & \textbf{Assets value at the end of year (MDL)} &\\[18pt]
 \hline
@@ -639,7 +641,7 @@ With all the information above it is possible to build the depreciation table, p
 \hline
 17240 & 10866.66 & 32600 & 1200 &\\[14pt]
 \hline
-\end{tabular}
+\end{tabularx}
 \caption{Depreciation of assets}
 \label{table:depreciation}
 \end{center}
@@ -659,7 +661,7 @@ With all the project expenses computed, it is easy to compute the product cost w
 
 \begin{table}[!h]
 \begin{center}
-\begin{tabular}{| M{14em} | M{10em} | M{10em} |N}
+\begin{tabularx}{\textwidth}{| Y | M{10em} | M{10em} |N}
 \hline
 \textbf{Expense type} & \textbf{Sum (MDL)} & \textbf{Percentage (\%)} &\\[18pt]
 \hline
@@ -677,9 +679,9 @@ Asset wear expenses & 3907 & 2.44 &\\[14pt]
 \hline
 \textbf{Total product cost} & \textbf{159972} & \textbf{100} &\\[14pt] 
 \hline
-\end{tabular}
-\caption{Depreciation of assets}
-\label{table:depreciation}
+\end{tabularx}
+\caption{Total Product Cost}
+\label{table:product_cost}
 \end{center}
 \end{table}
 
