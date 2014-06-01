@@ -354,48 +354,42 @@ To keep up with the latest trends and researches, it is also an essential object
 As it was said above the project will iterate over 5 steps: planning, research, development, testing and deployment. Naturally as most of the IT projects, it is subdivided into smaller parts. Planning step isn't supposed take up a lot of time, since the requirements are flexible. Moreover due to the research part the design solutions can change over time and open up new perspectives. The process of development is being split up in smaller tasks that can be accomplished within a 2-5 day period. Total duration of the project is computed using Formula \eqref{eq:duration}.
 
 \begin{equation} \label{eq:duration}
- Duration = StartDate - FinishDate + ReserveTime
+ Duration = FinishDate - StartDate + ReserveTime
 \end{equation}
 
-In table \ref{table:schedule} is presented the first iteration of the project schedule. It uses the following notations: 
-\begin{itemize}
- \item PM -- project manager
- \item SA -- system architect
- \item SM -- sales manager
- \item D -- developer
-\end{itemize}
+In table \ref{table:schedule} is presented the first iteration of the project schedule. It uses the following notations: PM -- project manager, SA -- system architect, SM -- sales manager, D -- developer.
 
 \begin{table}[!h]
 \begin{center}
 \begin{tabularx}{\textwidth}{| M{1.5em} | Y | Y | Y | Y |N}
 \hline
-\textbf{Nr} & \textbf{Activity Name} & \textbf{Duration} & \textbf{People involved} & \textbf{Comments} &\\[18pt]
+\textbf{Nr} & \textbf{Activity Name} & \textbf{Duration (days)} & \textbf{People involved} & \textbf{Comments} &\\[18pt]
 \hline
-1 & Define the project concept and objectives & 5 days & PM, SA, SM, D & It is a common task &\\[14pt]
+1 & Define the project concept and objectives & 5 & PM, SA, SM, D & It is a common task &\\[14pt]
 \hline
-2 & Perform market analysis & 10 days & PM, SA & Will results into a document describing market analysis &\\[14pt]
+2 & Perform market analysis & 10 & PM, SA & Will results into a document describing market analysis &\\[14pt]
 \hline
-3 & Analysis of the domain & 15 days & SA, D & Research of the recognition algorithms &\\[14pt]
+3 & Analysis of the domain & 15 & SA, D & Research of the recognition algorithms &\\[14pt]
 \hline
-4 & Write down requirements and specifications & 5 days & PM, SA, D & &\\[14pt]
+4 & Write down requirements and specifications & 5 & PM, SA, D & &\\[14pt]
 \hline
-5 & System design (UML) & 10 days & PM, SA, D & &\\[14pt]
+5 & System design (UML) & 10 & PM, SA, D & &\\[14pt]
 \hline
-6 & Database design & 3 days & PM, SA, D & Development database and end-user database schemes &\\[14pt]
+6 & Database design & 3 & PM, SA, D & Development database and end-user database schemes &\\[14pt]
 \hline
-7 & Preprocessing and learning part of the implementation & 30 days & PM, SA, D & &\\[14pt]
+7 & Preprocessing and learning part of the implementation & 30 & PM, SA, D & &\\[14pt]
 \hline
-8 & End-user application development & 20 days & PM, SA, D, SM & &\\[14pt]
+8 & End-user application development & 20 & PM, SA, D, SM & &\\[14pt]
 \hline
-9 & Validation of results & 10 days & PM, SA, D, SM & &\\[14pt]
+9 & Validation of results & 10 & PM, SA, D, SM & &\\[14pt]
 \hline
-10 & Documentation & 5 days & D & &\\[14pt]
+10 & Documentation & 5 & D & &\\[14pt]
 \hline
-11 & Deployment and testing & 10 days & PM, SA, D & &\\[14pt]
+11 & Deployment and testing & 10 & PM, SA, D & &\\[14pt]
 \hline
-12 & Active marketing & 5 days & SM & &\\[14pt]
+12 & Active marketing & 5 & SM & &\\[14pt]
 \hline
-13 & Total time to finish the system & 128 days & & &\\[14pt]
+13 & Total time to finish the system & 128 & & &\\[14pt]
 \hline
 \end{tabularx}
 \caption{Time schedule}
@@ -421,11 +415,7 @@ Computer & Lenovo X201 i5 processor & Unit & 10000 & 1 & 10000 &\\[14pt]
 \hline
 Smartphone & Nexus 5 & Unit & 8500 & 1 & 8500 &\\[14pt]
 \hline
-Single-board computer & Raspberry Pi Model B  & Unit & 600 & 1 & 600 &\\[14pt]
-\hline
-USB microphone & Logitech Labtec Microphone & Unit & 600 & 1 & 600 &\\[14pt]
-\hline
-Total & & & & & 19700 &\\[14pt]
+Total & & & & & 18500 &\\[14pt]
 \hline
 \end{tabularx}
 \caption{Tangible asset expenses}
@@ -457,15 +447,19 @@ Total & & & & & 14100 &\\[14pt]
 \hline
 \textbf{Material} & \textbf{Specification} & \textbf{Measurement unit} & \textbf{Price per unit (MDL)} & \textbf{Quantity} & \textbf{Sum (MDL)} &\\[18pt]
 \hline
-Paper & A4 & 500 sheets & 60 & 1 & 60 &\\[14pt]
+Single-board computer & Raspberry Pi Model B  & Unit & 600 & 1 & 600 &\\[14pt]
 \hline
-Whiteboard & Universal Dry Erase Board & 500 & Unit & 1 & 500 &\\[14pt]
+USB microphone & Logitech Labtec Microphone & Unit & 600 & 1 & 600 &\\[14pt]
+\hline
+Whiteboard & Universal Dry Erase Board & Unit & 500 & 1 & 500 &\\[14pt]
+\hline
+Paper & A4 & 500 sheets & 60 & 1 & 60 &\\[14pt]
 \hline
 Marker & Whiteboard marker & Unit & 10 & 5 & 50 &\\[14pt]
 \hline
 Pen & Blue pen & Unit & 3 & 3 & 9 &\\[14pt]
 \hline
-Total & & & & & 619 &\\[14pt]
+Total & & & & & 1819 &\\[14pt]
 \hline
 \end{tabularx}
 \caption{Direct expenses}
@@ -476,7 +470,7 @@ Total & & & & & 619 &\\[14pt]
 So the total amount of direct expenses represents 
 
 \begin{equation}
- 19700 + 14100 + 619 = 34419 lei
+ 18500 + 14100 + 1819 = 34419 lei
 \end{equation}
 
 \subsection{Salary expenses}
@@ -515,7 +509,7 @@ where $F_{re}$ is the salary expense fund and $T_{fs}$ is the social service tax
 The medical insurance fund is computed as
 
 \begin{equation}
- MI = F_{re} \cdot T_{mi} = 144110 lei \cdot 3.5 \% = 5043.85 lei
+ MI = F_{re} \cdot T_{mi} = 144110 lei \cdot 4 \% = 5764.4 lei
 \end{equation}
 
 where $T_{mi}$ is the mandatory medical insurance tax approved each year by law of medical insurance and this year it is $3.5\%$. 
@@ -523,7 +517,7 @@ where $T_{mi}$ is the mandatory medical insurance tax approved each year by law 
 So now having computed social service tax and medical insurance tax, it is possible to compute total work expense fund as follows
 
 \begin{equation}
- WEF = F_{re} + FS + MI = 144110 lei + 33145.3 lei + 5043.85 lei = 182299.15 lei
+ WEF = F_{re} + FS + MI = 144110 lei + 33145.3 lei + 5764.4 lei = 183019.7 lei
 \end{equation}
 
 where $WEF$ is the work expense fund, FS is the social fund and MI is the medical insurance fund. In that way the total work expense fund was computed. 
@@ -591,9 +585,9 @@ Transport & Public bus & Trip & 3.00 & 132 & 396 &\\[14pt]
 \hline
 Phone & Moldtelecom & Pack & 30.00 & 3 & 90 &\\[14pt]
 \hline
-Electricity & Union Fenosa & KWh & 1.10 & 250 & 275 &\\[14pt]
+Electricity & Union Fenosa & KWh & 1.58 & 250 & 395 &\\[14pt]
 \hline
-Total & & & & & 1361 &\\[14pt]
+Total & & & & & 1481 &\\[14pt]
 \hline
 \end{tabularx}
 \caption{Indirect expenses}
@@ -607,9 +601,8 @@ Another important part of economic analysis is the computation of wear and depre
 \begin{equation}
  \begin{split}
   Total Asset Value &= \sum_{} (AssetCost - Salvage Value) \\
-		    &= (10000 - 200) + (8500 - 200) + (600 - 200) + (600 - 200) +\\
-		    & + (5700 - 200) + (8400 - 200) \\
-		    &= 32600 lei
+		    &= (10000 - 200) + (8500 - 200) + (5700 - 200) + (8400 - 200) \\
+		    &= 31800 lei
  \end{split}
 \end{equation}
 
@@ -618,42 +611,22 @@ In order to get the yearly wear, divide total asset value by the period of use o
 \begin{equation} \label{eq:wear}
  \begin{split}
   Wear Per Year &= Total Asset Value / Period Of Use \\
-                &= 32600 lei/3 years= 10866.66 lei
+                &= 31800 lei/3 years= 10600 lei per year
  \end{split}
 \end{equation}
 
 Formula \eqref{eq:wear} included tangible assets which will last for 3 years and intangible assets which last only one year. The initial value of assets was
 
 \begin{equation}
- InitialAssetValue = Tangible Assets + Intangible Assets = 19700 + 14100 = 33800 lei
+ InitialAssetValue = Tangible Assets + Intangible Assets = 18500 + 14100 = 32600 lei
 \end{equation}
-
-With all the information above it is possible to build the depreciation table, presented in Table \ref{table:depreciation}.
-
-\begin{table}[!h]
-\begin{center}
-\begin{tabularx}{\textwidth}{| Y | Y | Y | Y|N}
-\hline
-\textbf{Assets value at the beginning of year (MDL)} & \textbf{Depreciation expense per year (MDL)} & \textbf{Accumulated depreciation at the end of year (MDL)} & \textbf{Assets value at the end of year (MDL)} &\\[18pt]
-\hline
-33800 & 10866.66 & 10866.66 & 22933.34 &\\[14pt]
-\hline
-25520 & 10866.66 & 21733.33 & 12066.67 &\\[14pt]
-\hline
-17240 & 10866.66 & 32600 & 1200 &\\[14pt]
-\hline
-\end{tabularx}
-\caption{Depreciation of assets}
-\label{table:depreciation}
-\end{center}
-\end{table}
 
 The project takes 128 days to be finish, respectively the wear value of the assets in this particular case should be
 
 \begin{equation}
  \begin{split}
   ProjectWearValue &= WearPerYear / DaysInYear \cdot ProjectDuration\\
-                   &= 10866.66 lei / 356 days \cdot 128 days = 3907.11 lei
+                   &= 32600 lei / 365 days \cdot 128 days = 11432.32 lei
  \end{split}
 \end{equation}
 
@@ -666,19 +639,19 @@ With all the project expenses computed, it is easy to compute the product cost w
 \hline
 \textbf{Expense type} & \textbf{Sum (MDL)} & \textbf{Percentage (\%)} &\\[18pt]
 \hline
-Direct expenses & 619 & 0.36 &\\[14pt]
+Direct expenses & 1819 & 1.07 &\\[14pt]
 \hline
-Indirect expenses & 1361 & 0.85 &\\[14pt]
+Indirect expenses & 1481 & 0.87 &\\[14pt]
 \hline
-Salary expenses & 144110 & 90.08  &\\[14pt]
+Salary expenses & 144110 & 85.36  &\\[14pt]
 \hline
-Social fund expenses & 6300 & 3.93 &\\[14pt]
+Social fund expenses & 6300 & 3.73 &\\[14pt]
 \hline
-Medical insurance expenses & 3675 & 2.29 &\\[14pt]
+Medical insurance expenses & 3675 & 2.17 &\\[14pt]
 \hline
-Asset wear expenses & 3907 & 2.44 &\\[14pt]
+Asset wear expenses & 11432 & 6.77 &\\[14pt]
 \hline
-\textbf{Total product cost} & \textbf{159972} & \textbf{100} &\\[14pt] 
+\textbf{Total product cost} & \textbf{168817} & \textbf{100} &\\[14pt] 
 \hline
 \end{tabularx}
 \caption{Total Product Cost}
@@ -692,7 +665,7 @@ At this point it is crucial to sell the product to clients from medical institut
 \begin{equation}
  \begin{split}
   Gross Price &= Total Product Cost / Number Of Copies Sold + Chosen Profit Percentage\\
-              &= 159972 lei/1000 copies + 15\% = 183.96 lei
+              &= 168817 lei/1000 copies + 15\% = 194.13 lei
  \end{split}
 \end{equation}
 
@@ -701,7 +674,7 @@ This is not the price of the end product, since it is necessary to add sales tax
 \begin{equation}
  \begin{split}
   Sale Price (incl. TVA) &= Gross Price + Sales Tax\\
-              &= 183.96 lei + 20\% = 220.75 lei
+              &= 194.13 lei + 20\% = 232.96 lei
  \end{split}
 \end{equation}
 
@@ -710,7 +683,7 @@ The net income is computed by multiplying gross price and the number of expected
 \begin{equation}
  \begin{split}
   Net Income &= Gross Price \cdot Number Of Copies Sold\\
-              &= 183.96 lei \cdot 1000 = 183960 lei
+              &= 194.13 lei \cdot 1000 = 194130 lei
  \end{split}
 \end{equation}
 
@@ -719,9 +692,9 @@ Moreover it is necessary to compute the gross and net profit. Gross profit is co
 \begin{equation}
  \begin{split}
   Gross Profit &= Net Income - Cost Of Production\\
-              &= 183960 - 159972 = 23988 lei\\              
+              &= 194130 - 168817 = 25313 lei\\              
   Net Profit &= Gross Profit - 12\% \\
-             &= 23988 - 12\% = 21109.44 lei
+             &= 25313 - 12\% = 22275.44 lei
  \end{split}
 \end{equation}
 
@@ -730,16 +703,17 @@ The profitability indicators are computed below:
 \begin{equation}
  \begin{split}
   Cost Profitability &= Gross Profit / Cost Of Production \cdot 100\%\\
-              &= 23988 / 159972 \cdot 100\% = 15 \%\\              
+              &= 25313 / 168817 \cdot 100\% = 15 \%\\              
   SalesProfitability &= Gross Profit / Net Income \cdot 100\% \\
-             &= 23988 / 183960 \cdot 100\% = 13 \%\\
+             &= 25313 / 194130 \cdot 100\% = 13 \%\\
   EconomicProfitability &= Gross Profit / Total Material Cost \cdot 100\%\\
-                        &= 23988 / 34419 \cdot 100\% = 69.7 \%\\
+                        &= 25313 / 34419 \cdot 100\% = 73.54 \%\\
  \end{split}
 \end{equation}
 
 \section{Economic conclusions}
-The snore and Sleep Apner disorder application was analyzed from the economic point of view. It was computed the production cost, different profit and profitability indicators, various types of expenses involved, including direct, indirect, salary and taxes. The whole analysis is worth to understand if the product will be successful and if it's worth investing money in it. The biggest expense represents the intellectual equity, since it is critical to have a reliable product, which is based on extensive research and professional development techniques. The number of expected sold copies might be exaggerated, but it is decided that the product is targeted towards a wider audience. Considering that nowadays most of the individuals own a smartphone, it is easier to get into the market of mobile applications. Deployment is easy, therefore people tend to try different applications from the store. The price of the application can become a blocker, therefore it's price might be dropped. In such scenario other means of profit can be introduced, for example in-app advertisement. 
+The snore and Sleep Apner disorder application was analyzed from the economic point of view. It was computed the production cost, different profit and profitability indicators, various types of expenses involved, including direct, indirect, salary and taxes. The whole analysis is worth to understand if the product will be successful and if it's worth investing money in it. The biggest expense represents the intellectual equity, since it is critical to have a reliable product, which is based on extensive research and professional development techniques. The number of expected sold copies might be exaggerated, but it is decided that the product is targeted towards a wider audience. Considering that nowadays most of the individuals own a smartphone, it is easier to get into the market of mobile applications. Deployment is easy, therefore people tend to try different applications from the store. The price of the application can become a blocker, therefore it's price might be dropped. In such scenario other means 
+of profit can be introduced, for example in-app advertisement. 
 
 The commercialization of the product is not an easy task. Especially when the product is open sourced. Nevertheless high-quality service and customer support can be provided only to institutions and users that bought the product. The success of the product highly depends on financial strategy and solid economic analysis, which was presented in this chapter.
 
