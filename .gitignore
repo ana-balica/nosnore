@@ -59,7 +59,14 @@ data/
 .buildozer
 
 # Latex
-thesis/*.aux
-thesis/*.toc
-thesis/*.log
-thesis/*.backup
+*.aux
+*.toc
+*.log
+*.backup
+*.fls
+*.lol
+*.lot
+*.tex~
+*.fdb_latexmk
+*.lof
+*.sty~
