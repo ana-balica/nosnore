@@ -1,0 +1,17 @@
+\section*{Introduction}
+\phantomsection
+Healthcare is one of the most important aspects of human life, therefore remarkable progress has been seen in applying Computer Science knowledge to cure illnesses, prevent diseases, diminish physical and mental impairments. 
+
+For the last several decades a series of investigations have been conducted regarding snoring and its relation to Obstructive Sleep Apnea Disorder. Snoring occurs when the air is moving through the back of the mouth, nose and throat, creating turbulence, which causes the all-known sounds. The snoring itself is not necessarily a troublemaker, but it should be taken into account that it may be a sign of the health disorder called Obstructive Sleep Apnea. It captures the attention of many researches, because it is a very common, widespread and unfortunately ignored disorder. On average about 30\% of people aged 30 or above snore and the proportion rises to 40\% for middle-aged people.
+
+In fact Sleep Apnea is a serious disorder in which one can have one or more pauses in breathing, which last from few seconds to several minutes, or shallow breaths while sleeping. Untreated Sleep Apnea leads to high blood pressure, heart disease, obesity, risks of sleepiness during daytime which can cause car accidents. Along with all the complex and expensive devices and tests to detect Sleep Apnea, this thesis contains a proposal of a simple home based solution to achieve quick results for people who suspect having similar problems.
+
+The software is a cross-platform application that is able to recognize a snoring pattern during nighttime, analyze a series of characteristics, track snoring and conclude on the chance of having Sleep Apnea. The application must be deployed on a device that can run Python programming language and has a microphone, such as a Raspberry Pi single-board computer with a 3.5 mm jack microphone or an Android phone with a built-in microphone.
+
+The application has a backend signal processing and machine learning classification algorithm, which uses a set of training examples to recognize the snoring pattern from the acoustic signal dynamics. Meanwhile there is a client-side piece of software that deals with recording sound and analyzing it in regard to the previous learning stage. Via application interface user can find out about the loudness, the frequency and the periods when snoring occurs and hence make his own conclusions on further investigations at the doctor. The statistical data has an accumulative effect and can present information not only for a single night, but also for the last 3 days, week, month, year, etc.
+
+Chapter \ref{sec:domain} presents domain analysis and model. It shows the differences between simple snoring and Obstructive Sleep Apnea, the risks of having such a disorder, how Obstructive Sleep Apnea can be diagnosed and treated. The following chapter also introduces the basic concepts on digital signal processing and methods applied to filter and analyse the sound waves, ultimately extracting features and creating sets of training and testing data feaded to a supervised learning algorithm, called Logistic Regression.
+
+Chapter \ref{sec:design} and Chapter \ref{sec:development} focus on system design in UML and the development of the project. Those chapters cover the implementation details, deployment strategies and testing of the final application. Chapter \ref{sec:economy} describes the schedule, tangible and intangible assets, expenses, product cost and common economic indicators.
+
+\clearpage
