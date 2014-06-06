@@ -27,7 +27,7 @@ As it was said above the project will iterate over 5 steps: planning, research, 
 
 In table \ref{table:schedule} is presented the first iteration of the project schedule. It uses the following notations: PM -- project manager, SA -- system architect, SM -- sales manager, D -- developer.
 
-\begin{table}[!h]
+\begin{table}[!ht]
 \begin{center}
 \caption{Time schedule}
 \begin{tabularx}{\textwidth}{| M{1.5em} | Y | Y | Y | Y |N}
@@ -80,7 +80,7 @@ The following section describes the evaluation of the project from the economic 
 \subsubsection{Tangible and intangible asset expenses}
 The budget for the required assets is shown in Table \ref{table:tangible_assets}, Table \ref{table:intangible_assets}, Table \ref{table:direct_expenses}.
 
-\begin{table}[!h]
+\begin{table}[!ht]
 \begin{center}
 \caption{Tangible asset expenses}
 \begin{tabularx}{\textwidth}{| M{5em} | Y | M{7em} | M{5em} | M{5em} | M{5em} |N}
@@ -98,7 +98,7 @@ Total & & & & & 18500 &\\[14pt]
 \end{center}
 \end{table}
 
-\begin{table}[!h]
+\begin{table}[!ht]
 \begin{center}
 \caption{Intangible asset expenses}
 \begin{tabularx}{\textwidth}{| M{5em} | Y | M{7em} | M{5em} | M{5em} | M{5em} |N}
@@ -116,7 +116,7 @@ Total & & & & & 14100 &\\[14pt]
 \end{center}
 \end{table}
 
-\begin{table}[!h]
+\begin{table}[!ht]
 \begin{center}
 \caption{Direct expenses}
 \begin{tabularx}{\textwidth}{| M{5em} | Y | M{7em} | M{5em} | M{5em} | M{5em} |N}
@@ -151,7 +151,7 @@ So the total amount of direct expenses represents
 \subsubsection{Salary expenses}
 The employees obviously should be paid accordingly. Hence this section is concerned about the salaries to employees and various funds that should be paid. The distribution of salaries is the following: project manager -- 350 lei, system architect -- 450 lei, sales manager -- 300 lei, developer -- 420 lei. Those expenses are introduces in Table \ref{table:salaries}.
 
-\begin{table}[!h]
+\begin{table}[!ht]
 \begin{center}
 \caption{Salary expenses}
 \begin{tabularx}{\textwidth}{| Y | M{8em} | M{8em} | M{8em} |N}
@@ -210,29 +210,28 @@ Social fund tax this year represents $6\%$, so the amount that should be tax pai
  Social Fund = 105000 lei \cdot 6\% = 6300 lei
 \end{equation}
 
-Medical insurance tax represents $3.5\%$ and gives the following result
+Medical insurance tax represents $4\%$ and gives the following result
 
 \begin{equation}
- Medical Insurance Fund = 105000 lei \cdot 3.5\% = 3675 lei 
+ Medical Insurance Fund = 105000 lei \cdot 4\% = 4200 lei
 \end{equation}
 
 In order to proceed with income tax computations, it is necessary to calculate the amount of taxed salary.
 
 \begin{equation}
 \begin{split}
- Taxed Salary &= Gross Salary - Social Fund - Medical Insurance Fund \\
-	      & - Personal Exemption - Supported Person Exemption \\
-              &= 105000 - 6300 - 3675 - 9120 - 2040 = 83865
+ Taxed Salary &= Gross Salary - Social Fund - Medical Insurance Fund - Personal Exemption \\
+              &= 105000 - 6300 - 4200 - 9516 = 84984 lei
 \end{split}
 \end{equation}
 
-The last but not the least thing to be computed is the total income tax, which is $7\%$ for income under 26700 lei and $18\%$ for income over 26700 lei.
+The last but not the least thing to be computed is the total income tax, which is $7\%$ for income under 27852 lei and $18\%$ for income over 27852 lei.
 
 \begin{equation}
 \begin{split}
  Income Tax &= Taxed Salary - Salary Tax \\
-	    &= 26700 \cdot 7\% + (83865 - 26700) \cdot 18\% \\
-	    & = 1869 + 10289.7 = 12158.7 lei
+	    &= 27852 \cdot 7\% + (84984 - 27852) \cdot 18\% \\
+	    & = 1949.64 + 10283.76 = 12233.4 lei
  \end{split}
 \end{equation}
 
@@ -241,14 +240,14 @@ With all this now it is possible to find out what's going to be the net income.
 \begin{equation}
 \begin{split}
  Net Salary &= Gross Salary - Income Tax - Social fund - Medical Insurance Fund \\
-            &= 105000 - 12158.7 - 6300 - 3675 = 82866.3 lei
+            &= 105000 - 12233.4 - 6300 - 4200 = 82266.6 lei
 \end{split}
 \end{equation}
 
 \subsubsection{Indirect expenses}
 The indirect expenses are things like electricity, Internet traffic, water, etc. Those will be presented in Table \ref{table:indirect_expenses}.
 
-\begin{table}[!h]
+\begin{table}[!ht]
 \begin{center}
 \caption{Indirect expenses}
 \begin{tabularx}{\textwidth}{| M{5em} | Y | M{7em} | M{5em} | M{5em} | M{5em} |N}
@@ -308,7 +307,7 @@ The project takes 128 days to be finish, respectively the wear value of the asse
 \subsubsection{Product cost}
 With all the project expenses computed, it is easy to compute the product cost which includes direct and indirect expenses, salary expenses and wear expenses as shown in Table \ref{table:product_cost}.
 
-\begin{table}[!h]
+\begin{table}[!ht]
 \begin{center}
 \caption{Total Product Cost}
 \begin{tabularx}{\textwidth}{| Y | M{10em} | M{10em} |N}
@@ -323,7 +322,7 @@ Salary expenses & 144110 & 85.36  &\\[14pt]
 \hline
 Social fund expenses & 6300 & 3.73 &\\[14pt]
 \hline
-Medical insurance expenses & 3675 & 2.17 &\\[14pt]
+Medical insurance expenses & 4200 & 2.17 &\\[14pt] % fix here
 \hline
 Asset wear expenses & 11432 & 6.77 &\\[14pt]
 \hline
@@ -381,9 +380,13 @@ The profitability indicators are computed below:
               &= 25313 / 168817 \cdot 100\% = 15 \%\\              
   SalesProfitability &= Gross Profit / Net Income \cdot 100\% \\
              &= 25313 / 194130 \cdot 100\% = 13 \%\\
-  EconomicProfitability &= Gross Profit / Total Material Cost \cdot 100\%\\
-                        &= 25313 / 34419 \cdot 100\% = 73.54 \%\\
  \end{split}
 \end{equation}
+
+\subsection{Economic conclusions}
+The snore and Sleep Apnea disorder application was analyzed from the economic point of view. It was computed the production cost, different profit and profitability indicators, various types of expenses involved, including direct, indirect, salary and taxes. The whole analysis is worth to understand if the product will be successful and if it's worth investing money in it. The biggest expense represents the intellectual equity, since it is critical to have a reliable product, which is based on extensive research and professional development techniques. The number of expected sold copies might be exaggerated, but it is decided that the product is targeted towards a wider audience. Considering that nowadays most of the individuals own a smartphone, it is easier to get into the market of mobile applications. Deployment is easy, therefore people tend to try different applications from the store. The price of the application can become a blocker, therefore it's price might be dropped. In such scenario other means 
+of profit can be introduced, for example in-app advertisement. 
+
+The commercialization of the product is not an easy task. Especially when the product is open sourced. Nevertheless high-quality service and customer support can be provided only to institutions and users that bought the product. The success of the product highly depends on financial strategy and solid economic analysis, which was presented in this chapter.
 
 \clearpage
