@@ -78,7 +78,7 @@ Here is a simple illustration of a man sleeping without obstruction (figure \ref
   \subfloat[Sleeping with obstruction\label{fig:sleep_with_obstruction}]{%
     \includegraphics[width=0.4\textwidth]{03_sleeping_with_obstruction.png}
   }
-  \caption{Airflow during sleeping, \cite{}}
+  \caption{Airflow during sleeping, \cite{surgery}}
   \label{fig:airflow}
 \end{figure}
 
@@ -92,7 +92,7 @@ Firstly OSA can lead to high blood pressure. The following is explained by the f
 
 The most serious consequence of OSA is considered the heart disease. On average people with sleep apnea have 30\% higher risk of having a heart attack than those who don't have OSA. Chronic sleep apnea can cause congestive heart failure, called cor pulmonale. Speaking in simple terms, low oxygen level and midnight waking stress lead to strokes and atrial fibrillation.
 
-It is known that 80\% of diabetics have OSA. Thought a direct link between the two was never proved, studies show that sleep deprivation causes insulin resistance. 
+It is known that 80\% of diabetics have OSA. Though a direct link between the two was never proved, studies show that sleep deprivation causes insulin resistance. 
 
 Same strange link between OSA and asthma exists. If sleep apnea is being treated, than patients report a decrease in asthma attacks. 
 
@@ -109,7 +109,7 @@ There are several ways to diagnose sleep apnea. Normally it should be a quintess
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=11cm]{04_oximeter.jpg}
-\caption{Oximeter}
+\caption{Oximeter, \cite{oximeter}}
 \label{fig:oximeter}
 \end{figure}
 
@@ -150,7 +150,7 @@ Possibly physical intervention for curing OSA is the most popular one. Positive 
 \begin{figure}[!ht]
 \centering
   \includegraphics{06_cpap.jpg}
-\caption{CPAP - Continuous Positive Airway Pressure}
+\caption{CPAP - Continuous Positive Airway Pressure, \cite{cpap}}
 \label{fig:cpap}
 \end{figure}
 
@@ -172,21 +172,17 @@ Some of the common types of surgeries are:
 
 Some of those surgeries can be conducted using Radiofrequency ablation (RFA). It uses low frequency radio wave energy to target tissue, causing coagulative necrosis. It is less common than CPAP or classical surgery, but has potential to become one.
 
-% [Can be extended]
-
 Those have been all the popular and most common ways to treat sleep apnea disorder. Neither of them gives absolute guarantee for a apnea-free life, but there exists a choice to make between invasive and non-invasive solutions. 
 
 \subsection{Theoretical Analysis}
 \subsubsection{Digital signal processing}
 In the context of communication everything is a wave. This is the starting point to understanding that everything travels as a wave and can be represented graphically. Signals can be analog and discrete. Discrete-time signals consist of sequences of quantities. In case it is obtained from a continuous-time signal it is characterized by a sampling rate. The process of analog to digital conversion consists of 2 step process: quantization and discretization. If both time series and the amplitude of a signal were discretized, then it is a digital signal.
 
-Digital signal processing (further used as DSP) represents a very important part in signal analysis. Since the major goal of this thesis is to develop an automated method for snore detection, digital signal processing becomes critical for correct computations. Roughly it might be considered a preprocessing phase in snore recognition, which is applied before feature extraction and machine learning. 
+Digital signal processing (further used as DSP) represents a very important part in signal analysis. Since the major goal of this thesis is to develop an automated method for snore detection, digital signal processing becomes critical for correct computations. Roughly it might be considered a preprocessing phase in snore recognition, which is applied before feature extraction. 
 
 DSP is the mathematical manipulation of signal information represented in discrete domain: time, frequency. One type of such signal represents the sound of which we are particularly interested. Generally the aim of DSP is to improve the accuracy and reliability of discrete signals by eliminating or diminishing noise.
 
-For the sake of clarity there will be presented a simple signal to which all the relevant digital processing algorithms will be applied.
-
-First it is necessary to generate a sample wave. For the matter of simplicity the signal is generated using 2 sine waves as shown in \eqref{eq:sample_sine}. The result is displayed in figure \ref{fig:sines}. The lower plot shows the same signal as on the upper plot, plus some random normally distributed noise. Further we will use the noisy data to do preprocessing.
+For the sake of clarity there will be presented a simple signal to which all the relevant digital processing algorithms will be applied. First it is necessary to generate a sample wave. For the matter of simplicity the signal is generated using 2 sine waves as shown in \eqref{eq:sample_sine}. The result is displayed in figures \ref{fig:sines1} and \ref{fig:sines2}. Plot \ref{fig:sines2} shows the same signal as on plot \ref{fig:sines1}, plus some random normally distributed noise. Further we will use the noisy data to do preprocessing.
 
 \begin{equation} \label{eq:sample_sine}
  y(t) = \sin(2\pi 0.05 x) + 3\sin(2\pi 0.09 x)
@@ -195,9 +191,16 @@ First it is necessary to generate a sample wave. For the matter of simplicity th
 
 \begin{figure}[!ht]
 \centering
-  \includegraphics[width=15cm]{07_sine_wave.eps}
-\caption{Sample sine waves with and without noise}
-\label{fig:sines}
+  \includegraphics[trim=0 11.2cm 0 0, clip, width=15cm]{07_sine_wave.eps}
+\caption{Sample sine wave without noise}
+\label{fig:sines1}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+  \includegraphics[trim=0 0 0 11.65cm, clip, width=15cm]{07_sine_wave.eps}
+\caption{Sample sine wave with noise}
+\label{fig:sines2}
 \end{figure}
 
 The most common way to improve the quality of a signal is to use digital filtering. It mainly consists of mathematical manipulations of a number of adjacent samples to a current sample. In preprocessing phase a low-pass filter is being used. It attenuates the high frequencies and passes low frequencies. It is characterized by the cut-off frequency, which should be specified explicitly for each signal. Low-pass filtering will make the signal appear smoother by removing short-term fluctuations. 
@@ -206,61 +209,59 @@ In this particular case the low-pass filter is implemented using Butterworth fil
 
 \begin{figure}[!ht]
 \centering
-  \includegraphics[width=15cm]{08_lowpass.eps}
-\caption{Sine wave with noise before and after low-pass filtering}
+  \includegraphics[trim=0 0 0 11.65cm, clip, width=15cm]{08_lowpass.eps}
+\caption{Noisy sine wave after low-pass filtering}
 \label{fig:lowpass}
 \end{figure}
 
 From the resulted data, it is easy to see that signal becomes smoother and doesn't contains high frequencies. Mathematically and intuitively it gives a good-enough result. 
 
-The next step is to perform normalization \eqref{eq:normalization}.
+The next step is to perform normalization according to \eqref{eq:normalization}.
 
 \begin{equation} \label{eq:normalization}
- x = \frac{x - \overline{x}}{\sigma}
+ x = \frac{x - \overline{x}}{\sigma},
 \end{equation}
 
 \noindent
-where $\overline{x}$ represents the arithmetic mean and $\sigma$ is the standard deviation. 
+where $\overline{x}$ represents the arithmetic mean and $\sigma$ is the standard deviation. Consequently, the signal wave is normalized and an example of normalization can be viewed in figure \ref{fig:normalized}.
 
-Consequently the signal wave is normalized and an example of normalization can be viewed in figure \ref{fig:normalized}.
+The best way to identify the missing fundamental frequency in a signal is to perform autocorrelation. Autocorrelation is a cross-correlation of a signal with itself. Mainly the autocorrelation yields repeating events from a signal. By definition for discrete time signal $x_n$ at time lag $j$, autocorrelation $R$ is given by
+
+\begin{equation}
+ R_{xx}(j) = \sum_{n}x_n\overline{x}_{n-j}.
+\end{equation}
 
 \begin{figure}[!ht]
 \centering
-  \includegraphics[width=15cm]{09_normalized.eps}
+  \includegraphics[trim=0 0 0 11.65cm, clip, width=15cm]{09_normalized.eps}
 \caption{Sample sine wave normalized}
 \label{fig:normalized}
 \end{figure}
 
-The best way to identify the missing fundamental frequency in a signal is to perform autocorrelation. Autocorrelation is a cross-correlation of a signal with itself. Mainly the autocorrelation yields repeating events from a signal. By definition for discrete time signal $x_n$ at time lag $j$, autocorrelation $R$ is
-
-\begin{equation}
- R_{xx}(j) = \sum_{n}x_n\overline{x}_{n-j}
-\end{equation}
-
-Nevertheless one of the most computationally cheap ways to perform autocorrelation is do the inverse Fourier transform of the product of the discrete Fourier transform with the conjugate of the previously computed Fourier transform. Discrete Fourier transforms can be performed using FastFFT algorithm.
+Nevertheless one of the most computationally cheap ways to perform autocorrelation is do the inverse Fourier transform of the product of the discrete Fourier transform with the conjugate of the previously computed Fourier transform. Discrete Fourier transforms can be performed using Fast Fourier Transform (FFT) algorithm.
 
 \begin{figure}[!ht]
 \centering
-  \includegraphics[width=15cm]{10_autocorrelation.eps}
+  \includegraphics[trim=0 0 0 11.65cm, clip, width=15cm]{10_autocorrelation.eps}
 \caption{The autocorrelation of the sine wave}
 \label{fig:autocorrelation}
 \end{figure}
 
 All the manipulations performed till this point were done in time domain. In time domain one can see the changes that happen to a signal over time, whereas in frequency domain one can observe how much of the signal lies within each frequency band over a range of frequencies. Normally signals can be converted from one domain to the other using transformations like Fourier series, Fourier transform, Laplace Transform, Z transform. 
 
-As previously mentioned Fourier transform performs a mathematical transformation from time to frequency domain and vice-versa. In engineering FFT (Fast Fourier Transform) algorithm is used widely due to its rapid computations. It factorizes the DFT (Discrete Fourier Transform) matrix into a product of sparse factors.  The DFT is defined by the relationship \eqref{eq:dft}.
+As previously mentioned Fourier transform performs a mathematical transformation from time to frequency domain and vice-versa. In engineering FFT (Fast Fourier Transform) algorithm is used widely due to its rapid computations. It factorizes the DFT (Discrete Fourier Transform) matrix into a product of sparse factors.  The DFT is defined by the relation \eqref{eq:dft}.
 
 \begin{equation} \label{eq:dft}
- X_k = \sum_{n=0}^{N-1} x_n e^{-i2\pi k\frac{n}{N}}, \qquad k= 0,\ldots , N-1
+ X_k = \sum_{n=0}^{N-1} x_n e^{-i2\pi k\frac{n}{N}}, \qquad k= 0,\ldots , N-1.
 \end{equation}
 
-Equation \eqref{eq:dft} has $O(N^2)$ complexity. In comparison, all known FFT algorithms require $\Theta (N \log N)$ operations, which represents a major improve in speed. FFT can also be used in computing Power Spectral Density (further used as PSD).
+Relation \eqref{eq:dft} has $O(N^2)$ complexity. In comparison, all known FFT algorithms require $\Theta (N \log N)$ operations, which represents a major improve in speed. FFT can also be used in computing Power Spectral Density (further used as PSD).
 
 PSD shows how the variance of data is distributed over the frequency domain and represents a very useful tool to identify oscillatory signals in time series. On $x$ axis it represents the signal frequencies and on $y$ axis the amplitude. 
 
 \begin{figure}[!ht]
 \centering
-  \includegraphics[width=15cm]{11_psd.eps}
+  \includegraphics[trim=0 0 0 11.65cm, clip, width=15cm]{11_psd.eps}
 \caption{Power Spectral Density of the signal}
 \label{fig:psd}
 \end{figure}
