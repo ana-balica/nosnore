@@ -1,37 +1,70 @@
 #:kivy 1.8.0
 #:set white (1, 1, 1)
+#:set blue (0x0F / 255., 0x1B / 255., 0x29 / 255.)
+#:set turquoise (0x21 / 255., 0x8D / 255., 0x80 / 255.)
+#:set light_blue (0x6A / 255., 0xBE / 255., 0xB1 / 255.)
+#:set grey (0xB8 / 255., 0xC6 / 255., 0xA5 / 255.)
+#:set creamy (0xF6 / 255., 0xF8 / 255., 0xD3 / 255.)
 
 
-<WhiteBoxLayout@BoxLayout>:
+<BackgroundBoxLayout@BoxLayout>:
     orientation: "vertical"
     canvas:
         Color:
-            rgb: white 
+            rgb: blue
         Rectangle:
             pos: self.pos
             size: self.size
 
+<SleepButton@Button>:
+    background_color: creamy
+    font_name: 'assets/fonts/DroidSans.ttf'
+    font_size: '20dp'
+    bold: True
+    # color: blue
+    # background_normal: 'assets/imgs/mask.png'
+    # background_down: 'mask.png'
+
+
+<MenuButton@Button>:
+    font_name: 'assets/fonts/DroidSans.ttf'
+
 
 <SleepScreen>:
-    WhiteBoxLayout:
+    id: sleep
+    BackgroundBoxLayout:
         id: sleep
+        padding: '40dp', min(root.height, root.width) / 4., '40dp', min(root.height, root.width) / 2.
 
-        Button:
+        SleepButton:
             id: toggle_rec_btn
             text: "Start"
-        Button:
-            text: 'Statistics'
-            on_press: root.manager.current = 'statistics'
-        Button:
-            text: "Settings"
-            on_press: root.manager.current = 'settings'
+            size_hint: 1, .4
+        Label:
+            markup: True
+            color: creamy
+            font_name: 'assets/fonts/DroidSans.ttf'
+            text: "Press the Start button\n to initiate recording"
+        
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'bottom'
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: 1, .12
+            MenuButton:
+                text: 'Statistics'
+                on_press: root.manager.current = 'statistics'
+            MenuButton:
+                text: "Settings"
+                on_press: root.manager.current = 'settings'
 
 
 <StatisticsScreen>:
-    WhiteBoxLayout:
+    BackgroundBoxLayout:
         id: statistics
 
 
 <SettingsScreen>:
-    WhiteBoxLayout:
+    BackgroundBoxLayout:
         id: settings
