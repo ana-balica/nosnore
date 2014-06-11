@@ -29,6 +29,11 @@
 <MenuButton@Button>:
     font_name: 'assets/fonts/DroidSans.ttf'
 
+<BasicLabel@Label>:
+    markup: True
+    color: creamy
+    font_name: 'assets/fonts/DroidSans.ttf'
+
 
 <SleepScreen>:
     id: sleep
@@ -40,10 +45,8 @@
             id: toggle_rec_btn
             text: "Start"
             size_hint: 1, .4
-        Label:
-            markup: True
-            color: creamy
-            font_name: 'assets/fonts/DroidSans.ttf'
+        BasicLabel:
+            id: sleep_label
             text: "Press the Start button\n to initiate recording"
         
     AnchorLayout:
@@ -79,10 +82,7 @@
         BoxLayout:
             orientation: "horizontal"
             size_hint: 1, .2
-            Label:
-                markup: True
-                color: creamy
-                font_name: 'assets/fonts/DroidSans.ttf'
+            BasicLabel:
                 font_size: min(root.height, root.width) / 22.
                 text: "Regular recording"
                 text_size: (root.width / 2.3, None)
@@ -126,11 +126,9 @@
             orientation: "lr-tb"
             size_hint: 1, .2
             padding: [0, min(root.height, root.width)/8]
-            Label:
+            BasicLabel:
                 text: "Start"
                 size_hint: .4, 1
-                markup: True
-                color: creamy
             TextInput:
                 size_hint: .17, None
                 height: min(root.height, root.width) / 8.
@@ -140,11 +138,9 @@
                 input_filter: 'int'
                 text: 'HH'
                 disabled: True
-            Label:
+            BasicLabel:
                 size_hint: .1, 1
                 text: ":"
-                color: creamy
-                markup: True
             TextInput:
                 size_hint: .17, None
                 height: min(root.height, root.width) / 8.
@@ -158,11 +154,9 @@
             orientation: "lr-tb"
             size_hint: 1, .2
             padding: [0, min(root.height, root.width)/8]
-            Label:
+            BasicLabel:
                 text: "Finish"
                 size_hint: .4, 1
-                markup: True
-                color: creamy
             TextInput:
                 size_hint: .17, None
                 height: min(root.height, root.width) / 8.
@@ -172,11 +166,9 @@
                 input_filter: 'int'
                 text: 'HH'
                 disabled: True
-            Label:
+            BasicLabel:
                 size_hint: .1, 1
                 text: ":"
-                color: creamy
-                markup: True
             TextInput:
                 size_hint: .17, None
                 height: min(root.height, root.width) / 8.
