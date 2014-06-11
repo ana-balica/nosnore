@@ -66,6 +66,28 @@
 <StatisticsScreen>:
     BackgroundBoxLayout:
         id: statistics
+        ActionBar:
+            ActionView:
+                use_separator: True
+                ActionPrevious:
+                    with_previous: False
+                ActionGroup:
+                    text: 'Select date range'
+                    ActionButton:
+                        text: 'Last day'
+                    ActionButton:
+                        text: 'Last 3 days'
+                    ActionButton:
+                        text: 'Last month'
+                    ActionButton:
+                        text: 'Last year'
+
+        BoxLayout:
+            orientation: "vertical"
+            BasicLabel:
+                text: "Time of recording - 8h"
+            BasicLabel:
+                text: "Time of snoring - 2h"
 
 
 <WeekdayLabel@Label>:
