@@ -74,7 +74,6 @@
     font_name: 'assets/fonts/DroidSans.ttf'
 
 
-
 <SettingsScreen>:
     BackgroundBoxLayout:
         id: settings
@@ -87,6 +86,7 @@
                 text: "Regular recording"
                 text_size: (root.width / 2.3, None)
             Switch:
+                id: settings_switch
         BoxLayout:
             orientation: "horizontal"
             size_hint: 1, .1
@@ -106,6 +106,7 @@
             WeekdayLabel:
                 text: "Sun"
         BoxLayout:
+            id: checkboxes
             orientation: "horizontal"
             size_hint: 1, .05
             CheckBox:
@@ -130,6 +131,7 @@
                 text: "Start"
                 size_hint: .4, 1
             TextInput:
+                id: start_hour
                 size_hint: .17, None
                 height: min(root.height, root.width) / 8.
                 font_size: min(root.height, root.width) / 20.
@@ -142,6 +144,7 @@
                 size_hint: .1, 1
                 text: ":"
             TextInput:
+                id: start_minute
                 size_hint: .17, None
                 height: min(root.height, root.width) / 8.
                 font_size: min(root.height, root.width) / 20.
@@ -158,6 +161,7 @@
                 text: "Finish"
                 size_hint: .4, 1
             TextInput:
+                id: finish_hour
                 size_hint: .17, None
                 height: min(root.height, root.width) / 8.
                 font_size: min(root.height, root.width) / 20.
@@ -170,6 +174,7 @@
                 size_hint: .1, 1
                 text: ":"
             TextInput:
+                id: finish_minute
                 size_hint: .17, None
                 height: min(root.height, root.width) / 8.
                 font_size: min(root.height, root.width) / 20.
