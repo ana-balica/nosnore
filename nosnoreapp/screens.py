@@ -8,10 +8,13 @@ class SleepScreen(Screen):
 
     def toggle_btn(self, *args):
         btn_label = self.ids.toggle_rec_btn.text
+        sleep_label = self.ids.sleep_label.text
         if btn_label == "Start":
             self.ids.toggle_rec_btn.text = "Stop"
+            self.ids.sleep_label.text = "Press the Stop button\nto end recording"
         else:
             self.ids.toggle_rec_btn.text = "Start"
+            self.ids.sleep_label.text = "Time of recording - 8h\nTime of snoring - 2h\nChance of apnea - 24%"
 
 
 class StatisticsScreen(Screen):
