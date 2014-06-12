@@ -175,7 +175,7 @@ Some of those surgeries can be conducted using Radiofrequency ablation (RFA). It
 Those have been all the popular and most common ways to treat sleep apnea disorder. Neither of them gives absolute guarantee for a apnea-free life, but there exists a choice to make between invasive and non-invasive solutions. 
 
 \subsection{Theoretical Analysis}
-\subsubsection{Digital signal processing}
+\subsubsection{Digital signal processing}\label{subsubsec:dsp}
 In the context of communication everything is a wave. This is the starting point to understanding that everything travels as a wave and can be represented graphically. Signals can be analog and discrete. Discrete-time signals consist of sequences of quantities. In case it is obtained from a continuous-time signal it is characterized by a sampling rate. The process of analog to digital conversion consists of 2 step process: quantization and discretization. If both time series and the amplitude of a signal were discretized, then it is a digital signal.
 
 Digital signal processing (further used as DSP) represents a very important part in signal analysis. Since the major goal of this thesis is to develop an automated method for snore detection, digital signal processing becomes critical for correct computations. Roughly it might be considered a preprocessing phase in snore recognition, which is applied before feature extraction. 
@@ -227,7 +227,7 @@ where $\overline{x}$ represents the arithmetic mean and $\sigma$ is the standard
 
 The best way to identify the missing fundamental frequency in a signal is to perform autocorrelation. Autocorrelation is a cross-correlation of a signal with itself. Mainly the autocorrelation yields repeating events from a signal. By definition for discrete time signal $x_n$ at time lag $j$, autocorrelation $R$ is given by
 
-\begin{equation}
+\begin{equation}\label{eq:accor}
  R_{xx}(j) = \sum_{n}x_n\overline{x}_{n-j}.
 \end{equation}
 
@@ -271,7 +271,67 @@ In figure \ref{fig:psd} it is clearly seen a peak at about $0.05$ and a nearby p
 To conclude DSP offered a variety of tools and algorithms to manipulate the initial noisy signal in order to achieve a concise representation with the most relevant information.
 
 \subsubsection{Feature extraction and supervised learning}
-% In Machine Learning field one the most important aspect is considered feature extraction. The number of features and their quality are shaping the final result. The whole process of DSP was applied in order to 
+Machine learning is a scientific discipline that develops algorithms to discover knowledge from specific data and experience, based on statistical and computational principles. It is a multidiscipline based on probability theory, statistics, optimization technics. The application range is vast and includes pattern recognition, language processing, data mining, expert systems, forecasting, robotisc. 
+
+There exist a classification of different types of machine learning algorithms. The most relevant groups are unsupervised learning (working with unlabelled data), semi-supervised learning (contains both labelled and unlabelled samples) and supervised learning (it is training on labelled data). The following thesis makes use of supervised learning, since it is clear what exactly the algorithm is searching for and has access to a big sets of labelled data.
+
+The task of supervised learning is to find an inffered function based on training data. An example of a linear function is presented in figure \ref{fig:scatterplot}. 
+
+\begin{figure}[!ht]
+\centering
+  \includegraphics[width=12cm]{15_scatterplot.png}
+\caption{Linear binary classification, \cite{scatterplot}}
+\label{fig:scatterplot}
+\end{figure}
+
+The supervised learning algorithm or the classifier should not try to exactly match the training examples, this will most probably lead to overfitting. A good learning algorithm should adjust the tradeoff of fitting the data and keeping the function as less complex as possible.
+
+The first step in supervised learning represents the data and how it is represented. The gathered data should be representative to the problem that is being solved. Next step represents the input features. A feature is a measurable heuristic property of a phenomenon being observed. A set of features builds up a feature vector. The accuracy of the learned function highly depends on input features. Number of features shouldn't be too large, obviously not larges the set of training samples. Later it is necessary to determine the learning algorithm, and for this particular case it was decided to use logistic regression. Afterwards the learning algorithm runs on the training set. Testing is also very important to check the performance and accuracy of the learned model. 
+
+Logistic regression is a binary predictor used for classification problems in machine learning. As most of the learning algorithms it's prediction is based on input features. It is possible to extend logistic regression possiblities and use it for multiple category classification by using the ``one-vs-all'' strategy. 
+
+In binary logistic regression the outcome is usually coded as ``0'' and ``1''. What makes logistic regression simple and yet very powerful is the representation of the hypothesis function. It is based on sigmoid function presented in \eqref{eq:sigmoid} and figure \ref{fig:sigmoid}. The special property of sigmoid function is that it's output will result in values close to ``0'' or ``1''.
+
+\begin{equation}\label{eq:sigmoid}
+ S(x) = \frac{1}{1 + e^{-x}}.
+\end{equation}
+
+\begin{figure}[!ht]
+\centering
+  \includegraphics[width=10cm]{16_sigmoid.png}
+\caption{Sigmoid function, \cite{sigmoid}}
+\label{fig:sigmoid}
+\end{figure}
+
+The logistic function is based on sigmoid function and is shown in \eqref{eq:logistic}.
+
+\begin{equation}\label{eq:logistic}
+\begin{split}
+ h_{\Theta}(x) &= S(\Theta^T x) \\
+ h_{\Theta}(x) &= \frac{1}{1 + e^{-\Theta^T x}}.
+\end{split}
+\end{equation}
+
+Hence the result of the hypothesis function is the probability that the decision is $1$ given $x$ feature vector. $\Theta$ is the parameters vector -- the one that is supposed to be found. Hypothesis function models the decision boundary based on the $\Theta$ vector. The decision boundary can be linear or of a more complex form.
+
+Consider the following training set
+
+\begin{equation}\label{eq:sigmoid}
+ A = \{(x^{(1)}, y^{(1)}), (x^{(2)}, y^{(2)}), \ldots , (x^{(m)}, y^{(m)})\},
+\end{equation}
+
+\noindent
+where $x$ is the feature vector and $y$ is the decision vector $\{0, 1\}$. To determine the $\Theta$ vector it is necessary to minimize the cost the function. The cost function is given by
+
+\begin{equation}\label{eq:sigmoid}
+ J_{\Theta} =\frac{1}{m} \sum_{i = 1}^{m} [-y^{(i)} \log{(h_{\Theta}(x^{(i)})) - (1 - y^{(i)}) \log{1 - h_{\Theta}(x^{(i)}))}}].
+\end{equation}
+
+The cost function is the same as for the linear regression, the difference is the hyphoses function. By miniming the cost function it will reveal the parameters and the hypophesis function build a boundary that can be used to make future predictions on new $x$ input feature vector. 
+
+For miniming $J_{\Theta}$ very often the gradient descent algorithm is used. So far this is the less complex algorithm for minimization, but there are other faster methods like conjugate gradient, BFGS (Broyden–Fletcher–Goldfarb–Shanno) algorithm, L-BFGS (Limited memory BFGS) algorithm.
+
+As a conclusion it is clear now how DSP and machine learning match together, since DSP serves as a prepequisite to feature extraction from the PSD, which represents the training set used by the logistic regression algorithm to classify data as ``snore'' vs ``no snore''.
 
 \clearpage
 
