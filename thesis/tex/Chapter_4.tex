@@ -19,48 +19,50 @@ The other crucial objective is to be as precise as possible. Since it deals with
 To keep up with the latest trends and researches, it is also an essential objective to keep updated and provide enhancements to the software. The lifecycle of the application will require bugfixes, interface changes, feature implementations. All of that will help the system still be trendy and up-to-date on the market.
 
 \subsubsection{Time schedule establishment}
-As it was said above the project will iterate over 5 steps: planning, research, development, testing and deployment. Naturally as most of the IT projects, it is subdivided into smaller parts. Planning step isn't supposed take up a lot of time, since the requirements are flexible. Moreover due to the research part the design solutions can change over time and open up new perspectives. The process of development is being split up in smaller tasks that can be accomplished within a 2-5 day period. Total duration of the project is computed using Formula \eqref{eq:duration}.
+As it was said above the project will iterate over 5 steps: planning, research, development, testing and deployment. Naturally as most of the IT projects, it is subdivided into smaller parts. Planning step isn't supposed take up a lot of time, since the requirements are flexible. Moreover due to the research part the design solutions can change over time and open up new perspectives. The process of development is being split up in smaller tasks that can be accomplished within a 2-5 day period. Total duration of the project is computed using \eqref{eq:duration}.
 
 \begin{equation} \label{eq:duration}
- Duration = FinishDate - StartDate + ReserveTime
+ D_T = D_F - D_S + T_R,
 \end{equation}
 
-In table \ref{table:schedule} is presented the first iteration of the project schedule. It uses the following notations: PM -- project manager, SA -- system architect, SM -- sales manager, D -- developer.
+\noindent 
+where $D_T$ is the duration, $D_F$ -- the finish date, $D_S$ -- the start date and $T_R$ -- reserve time. In table \ref{table:schedule} is presented the first iteration of the project schedule. It uses the following notations: PM -- project manager, SA -- system architect, SM -- sales manager, D -- developer.
 
 \begin{table}[!ht]
 \begin{center}
 \caption{Time schedule}
-\begin{tabularx}{\textwidth}{| M{1.5em} | Y | Y | Y | Y |N}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{| c | >{\centering\arraybackslash}p{5cm} | >{\centering\arraybackslash}p{2cm} | c | >{\centering\arraybackslash}p{5cm} |}
 \hline
-\textbf{Nr} & \textbf{Activity Name} & \textbf{Duration (days)} & \textbf{People involved} & \textbf{Comments} &\\[18pt]
+\textbf{Nr} & \textbf{Activity Name} & \textbf{Duration (days)} & \textbf{People involved} & \textbf{Comments} \\
 \hline
-1 & Define the project concept and objectives & 5 & PM, SA, SM, D & It is a common task &\\[14pt]
+1 & Define the project concept and objectives & 5 & PM, SA, SM, D & It is a common task \\
 \hline
-2 & Perform market analysis & 10 & PM, SA & Will results into a document describing market analysis &\\[14pt]
+2 & Perform market analysis & 10 & PM, SA & Will results into a document describing market analysis \\
 \hline
-3 & Analysis of the domain & 15 & SA, D & Research of the recognition algorithms &\\[14pt]
+3 & Analysis of the domain & 15 & SA, D & Research of the recognition algorithms \\
 \hline
-4 & Write down requirements and specifications & 5 & PM, SA, D & &\\[14pt]
+4 & Write down requirements and specifications & 5 & PM, SA, D & \\
 \hline
-5 & System design (UML) & 10 & PM, SA, D & &\\[14pt]
+5 & System design (UML) & 10 & PM, SA, D & \\
 \hline
-6 & Database design & 3 & PM, SA, D & Development database and end-user database schemes &\\[14pt]
+6 & Database design & 3 & PM, SA, D & Development database and end-user database schemes\\
 \hline
-7 & Preprocessing and learning part of the implementation & 30 & PM, SA, D & &\\[14pt]
+7 & Preprocessing and learning part of the implementation & 30 & PM, SA, D & \\
 \hline
-8 & End-user application development & 20 & PM, SA, D, SM & &\\[14pt]
+8 & End-user application development & 20 & PM, SA, D, SM & \\
 \hline
-9 & Validation of results & 10 & PM, SA, D, SM & &\\[14pt]
+9 & Validation of results & 10 & PM, SA, D, SM & \\
 \hline
-10 & Documentation & 5 & D & &\\[14pt]
+10 & Documentation & 5 & D & \\
 \hline
-11 & Deployment and testing & 10 & PM, SA, D & &\\[14pt]
+11 & Deployment and testing & 10 & PM, SA, D & \\
 \hline
-12 & Active marketing & 5 & SM & &\\[14pt]
+12 & Active marketing & 5 & SM & \\
 \hline
-13 & Total time to finish the system & 128 & & &\\[14pt]
+13 & Total time to finish the system & 128 & & \\
 \hline
-\end{tabularx}
+\end{tabular}
 \label{table:schedule}
 \end{center}
 \end{table}
@@ -83,17 +85,18 @@ The budget for the required tangible and intangible assets is shown in Table \re
 \begin{table}[!ht]
 \begin{center}
 \caption{Tangible asset expenses}
-\begin{tabularx}{\textwidth}{| M{5em} | Y | M{7em} | M{5em} | M{5em} | M{5em} |N}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{| c | c | >{\centering\arraybackslash}p{2.7cm} | >{\centering\arraybackslash}p{2cm} | c | >{\centering\arraybackslash}p{5em}|}
 \hline
-\textbf{Material} & \textbf{Specification} & \textbf{Measurement unit} & \textbf{Price per unit (MDL)} & \textbf{Quantity} & \textbf{Sum (MDL)} &\\[18pt]
+\textbf{Material} & \textbf{Specification} & \textbf{Measurement unit} & \textbf{Price per unit (MDL)} & \textbf{Quantity} & \textbf{Sum (MDL)}\\
 \hline
-Computer & Lenovo X201 i5 processor & Unit & 10000 & 1 & 10000 &\\[14pt]
+Computer & Lenovo X201 i5 processor & Unit & 10000 & 1 &  \multicolumn{1}{r|}{10000}\\
 \hline
-Smartphone & Nexus 5 & Unit & 8500 & 1 & 8500 &\\[14pt]
+Smartphone & Nexus 5 & Unit & 8500 & 1 & \multicolumn{1}{r|}{8500}\\
 \hline
-Total & & & & & 18500 &\\[14pt]
+\multicolumn{5}{|r|}{Total} & \multicolumn{1}{r|}{18500}\\
 \hline
-\end{tabularx}
+\end{tabular}
 \label{table:tangible_assets}
 \end{center}
 \end{table}
@@ -101,17 +104,18 @@ Total & & & & & 18500 &\\[14pt]
 \begin{table}[!ht]
 \begin{center}
 \caption{Intangible asset expenses}
-\begin{tabularx}{\textwidth}{| M{5em} | Y | M{7em} | M{5em} | M{5em} | M{5em} |N}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{| c | >{\centering\arraybackslash}p{5cm} | >{\centering\arraybackslash}p{2.7cm} | >{\centering\arraybackslash}p{2cm} | c | >{\centering\arraybackslash}p{5em}|}
 \hline
-\textbf{Material} & \textbf{Specification} & \textbf{Measurement unit} & \textbf{Price per unit (MDL)} & \textbf{Quantity} & \textbf{Sum (MDL)} &\\[18pt]
+\textbf{Material} & \textbf{Specification} & \textbf{Measurement unit} & \textbf{Price per unit (MDL)} & \textbf{Quantity} & \textbf{Sum (MDL)} \\
 \hline
-License & Enterprise Architect Desktop Edition License & Unit & 1900 & 3 & 5700 &\\[14pt]
+License & Enterprise Architect Desktop Edition License & Unit & 1900 & 3 & \multicolumn{1}{r|}{5700} \\
 \hline
-License & PyCharm Commercial License & Unit & 2800 & 3 & 8400 &\\[14pt]
+License & PyCharm Commercial License & Unit & 2800 & 3 & \multicolumn{1}{r|}{8400}\\
 \hline
-Total & & & & & 14100 &\\[14pt]
+\multicolumn{5}{|r|}{Total} & \multicolumn{1}{r|}{14100}\\
 \hline
-\end{tabularx}
+\end{tabular}
 \label{table:intangible_assets}
 \end{center}
 \end{table}
@@ -119,73 +123,93 @@ Total & & & & & 14100 &\\[14pt]
 \begin{table}[!ht]
 \begin{center}
 \caption{Direct expenses}
-\begin{tabularx}{\textwidth}{| M{5em} | Y | M{7em} | M{5em} | M{5em} | M{5em} |N}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{| >{\centering\arraybackslash}p{5em} | >{\centering\arraybackslash}p{7em} | >{\centering\arraybackslash}p{7em} | >{\centering\arraybackslash}p{5em} | >{\centering\arraybackslash}p{5em} | r |}
 \hline
-\textbf{Material} & \textbf{Specification} & \textbf{Measurement unit} & \textbf{Price per unit (MDL)} & \textbf{Quantity} & \textbf{Sum (MDL)} &\\[18pt]
+\textbf{Material} & \textbf{Specification} & \textbf{Measurement unit} & \textbf{Price per unit (MDL)} & \textbf{Quantity} & \multicolumn{1}{>{\centering\arraybackslash}p{5em}|}{\textbf{Sum (MDL)}}\\
 \hline
-Single-board computer & Raspberry Pi Model B  & Unit & 600 & 1 & 600 &\\[14pt]
+Single-board computer & Raspberry Pi Model B  & Unit & 600 & 1 & 600 \\
 \hline
-USB microphone & Logitech Labtec Microphone & Unit & 600 & 1 & 600 &\\[14pt]
+USB microphone & Logitech Labtec Microphone & Unit & 600 & 1 & 600 \\
 \hline
-Whiteboard & Universal Dry Erase Board & Unit & 500 & 1 & 500 &\\[14pt]
+Whiteboard & Universal Dry Erase Board & Unit & 500 & 1 & 500 \\
 \hline
-Paper & A4 & 500 sheets & 60 & 1 & 60 &\\[14pt]
+Paper & A4 & 500 sheets & 60 & 1 & 60 \\
 \hline
-Marker & Whiteboard marker & Unit & 10 & 5 & 50 &\\[14pt]
+Marker & Whiteboard marker & Unit & 10 & 5 & 50 \\
 \hline
-Pen & Blue pen & Unit & 3 & 3 & 9 &\\[14pt]
+Pen & Blue pen & Unit & 3 & 3 & 9 \\
 \hline
-Total & & & & & 1819 &\\[14pt]
+\multicolumn{5}{|r|}{Total} & 1819 \\
 \hline
-\end{tabularx}
+\end{tabular}
 \label{table:direct_expenses}
 \end{center}
 \end{table}
 
 \newpage
-So the total amount of direct expenses represents 
+So the total amount of direct expenses in MDL is
 
 \begin{equation}
- 18500 + 14100 + 1819 = 34419 lei
+ T_{e} = 18500 + 14100 + 1819 = 34419
 \end{equation}
 
+
 \subsubsection{Salary expenses}
-The employees obviously should be paid accordingly. Hence this section is concerned about the salaries to employees and various funds that should be paid. The distribution of salaries is the following: project manager -- 350 lei, system architect -- 450 lei, sales manager -- 300 lei, developer -- 420 lei. Those expenses are introduces in Table \ref{table:salaries}.
+The employees obviously should be paid accordingly. Hence this section is concerned about the salaries to employees and various funds that should be paid. The distribution of salaries is the following:
+
+\begin{itemize}[topsep=5pt, partopsep=0pt,itemsep=3pt,parsep=1pt]
+ \item project manager -- 350 MDL;
+ \item system architect -- 450 MDL;
+ \item sales manager -- 300 MDL;
+ \item developer -- 420 MDL. 
+\end{itemize}
 
 \begin{table}[!ht]
 \begin{center}
 \caption{Salary expenses}
-\begin{tabularx}{\textwidth}{| Y | M{8em} | M{8em} | M{8em} |N}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{| >{\centering\arraybackslash}p{8em} | >{\centering\arraybackslash}p{8em} | >{\centering\arraybackslash}p{8em} | r |}
 \hline
-\textbf{Employee} & \textbf{Work fund (days)} & \textbf{Salary per day (MDL)} & \textbf{Salary fund (MDL)}&\\[18pt]
+\textbf{Employee} & \textbf{Work fund (days)} & \textbf{Salary per day (MDL)} & \multicolumn{1}{>{\centering\arraybackslash}p{5em}|}{\textbf{Salary fund (MDL)}}\\
 \hline
-Project Manager & 103 & 350 & 36050 &\\[14pt]
+Project Manager & 103 & 350 & 36050 \\
 \hline 
-System Architect & 108 & 450 & 48600 &\\[14pt]
+System Architect & 108 & 450 & 48600\\
 \hline
-Sales Manager & 40 & 300 & 12000 &\\[14pt]
+Sales Manager & 40 & 300 & 12000\\
 \hline
-Developer & 113 & 420 & 47460 &\\[14pt]
+Developer & 113 & 420 & 47460\\
 \hline
-Total & & & 144110 &\\[14pt]
+\multicolumn{3}{|r|}{Total} & 144110\\
 \hline
-\end{tabularx}
+\end{tabular}
 \label{table:salaries}
 \end{center}
 \end{table}
 
-Now by having computed all the salaries for the employees, it is time to compute how much to be paid to social services fund, medical insurance fund and the total work expenses by summing up all previous expenses. So the social service fund which is $23\%$ this year will be 
+Now by having computed all the salaries for the employees, it is time to compute how much to be paid to social services fund, medical insurance fund and the total work expenses by summing up all previous expenses. 
 
-\begin{equation}
- FS = F_{re} \cdot T_{fs} = 144110 lei \cdot 23 \% = 33145.3 lei 	
+Salary expenses are introduces in Table \ref{table:salaries}.
+
+This year the social service fund is approved to be $23\%$, therefore the salary expenses are computed according to the relation \eqref{eq:fs}.
+
+\begin{equation}\label{eq:fs}
+\begin{split}
+ FS &= F_{re} \cdot T_{fs} \\
+    &= 144110 \cdot 23 \% \\
+    &= 33145.3,
+\end{split}
 \end{equation}
 \noindent
-where $F_{re}$ is the salary expense fund and $T_{fs}$ is the social service tax approved each year.
-
-The medical insurance fund is computed as
+where $FS$ is the salary expense, $F_{re}$ is the salary expense fund and $T_{fs}$ is the social service tax approved each year. The medical insurance fund is computed as
 
 \begin{equation}
- MI = F_{re} \cdot T_{mi} = 144110 lei \cdot 4 \% = 5764.4 lei
+\begin{split}
+ MI &= F_{re} \cdot T_{mi}\\ 
+    &= 144110 \cdot 4 \%\\ 
+    &= 5764.4,
+ \end{split}
 \end{equation}
 
 \noindent
@@ -194,7 +218,11 @@ where $T_{mi}$ is the mandatory medical insurance tax approved each year by law 
 So now having computed social service tax and medical insurance tax, it is possible to compute total work expense fund as follows
 
 \begin{equation}
- WEF = F_{re} + FS + MI = 144110 lei + 33145.3 lei + 5764.4 lei = 183019.7 lei
+\begin{split}
+ WEF &= F_{re} + FS + MI\\ 
+     &= 144110 + 33145.3 + 5764.4\\ 
+     &= 183019.7,
+\end{split}
 \end{equation}
 
 \noindent
@@ -204,48 +232,59 @@ where $WEF$ is the work expense fund, FS is the social fund and MI is the medica
 Along with total work expense fund, it is necessary to compute the annual salary for the developer. Considering that the developer has a salary of 420 lei per day and there are totally 250 working days in the year, so the gross salary that the developer get is
 
 \begin{equation}
- Gross Salary = 420 lei \cdot 250 days = 105000 lei
+ GS = 420 \cdot 250 = 105000,
 \end{equation}
 
-Social fund tax this year represents $6\%$, so the amount that should be tax paid is
+\noindent where $GS$ is the gross salary computed in MDL.
+
+Social fund tax this year represents $6\%$, so the amount that should be tax paid in MDL represents
 
 \begin{equation}
- Social Fund = 105000 lei \cdot 6\% = 6300 lei
+ SF = 105000 \cdot 6\% = 6300.
 \end{equation}
 
 Medical insurance tax represents $4\%$ and gives the following result
 
 \begin{equation}
- Medical Insurance Fund = 105000 lei \cdot 4\% = 4200 lei
+ MIF = 105000 \cdot 4\% = 4200.
 \end{equation}
 
 In order to proceed with income tax computations, it is necessary to calculate the amount of taxed salary.
 
 \begin{equation}
 \begin{split}
- Taxed Salary &= Gross Salary - Social Fund - Medical Insurance Fund - Personal Exemption \\
-              &= 105000 - 6300 - 4200 - 9516 = 84984 lei
+ TS &= GS - SF - MIF - PE \\
+              &= 105000 - 6300 - 4200 - 9516\\ 
+              &= 84984,
 \end{split}
 \end{equation}
 
-The last but not the least thing to be computed is the total income tax, which is $7\%$ for income under 27852 lei and $18\%$ for income over 27852 lei.
+\noindent
+where $TS$ is the taxed salary, $GS$ -- gross salary, $SF$ -- social fund, $PE$ -- personal exemption, which this year is approved to be $9516$.
+
+The last but not the least thing to be computed is the total income tax, which is $7\%$ for income under 27852 lei and $18\%$ for income over 27852 MDL.
 
 \begin{equation}
 \begin{split}
- Income Tax &= Taxed Salary - Salary Tax \\
+ IT &= TS - ST \\
 	    &= 27852 \cdot 7\% + (84984 - 27852) \cdot 18\% \\
-	    & = 1949.64 + 10283.76 = 12233.4 lei
+	    & = 1949.64 + 10283.76 = 12233.4,
  \end{split}
 \end{equation}
 
-With all this now it is possible to find out what's going to be the net income.
+\noindent
+where $IC$ is the income tax, $TS$ -- the taxed salary and $ST$ -- the salary tax. With all this now it is possible to find out what's going to be the net income.
 
 \begin{equation}
 \begin{split}
- Net Salary &= Gross Salary - Income Tax - Social fund - Medical Insurance Fund \\
-            &= 105000 - 12233.4 - 6300 - 4200 = 82266.6 lei
+ NS &= GS - IT - SF - MIF \\
+            &= 105000 - 12233.4 - 6300 - 4200 \\
+            &= 82266.6,
 \end{split}
 \end{equation}
+
+\noindent
+where $NS$ is the net salary, $GS$ -- gross salary, $IT$ -- income tax, $SF$ -- social fund, $MIF$ -- medical insurance fund.
 
 \subsubsection{Indirect expenses}
 The indirect expenses are things like electricity, Internet traffic, water, etc. Those will be presented in Table \ref{table:indirect_expenses}.
@@ -253,21 +292,22 @@ The indirect expenses are things like electricity, Internet traffic, water, etc.
 \begin{table}[!ht]
 \begin{center}
 \caption{Indirect expenses}
-\begin{tabularx}{\textwidth}{| M{5em} | Y | M{7em} | M{5em} | M{5em} | M{5em} |N}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{| >{\centering\arraybackslash}p{5em} | >{\centering\arraybackslash}p{7em} | >{\centering\arraybackslash}p{7em} | >{\centering\arraybackslash}p{5em} | >{\centering\arraybackslash}p{5em} | r |}
 \hline
-\textbf{Material} & \textbf{Specification} & \textbf{Measurement unit} & \textbf{Price per unit (MDL)} & \textbf{Quantity} & \textbf{Sum (MDL)} &\\[18pt]
+\textbf{Material} & \textbf{Specification} & \textbf{Measurement unit} & \textbf{Price per unit (MDL)} & \textbf{Quantity} & \multicolumn{1}{>{\centering\arraybackslash}p{4em}|}{\textbf{Sum (MDL)}}\\
 \hline
-Internet & Moldtelecom & Pack & 200.00 & 3 & 600.00 &\\[14pt]
+Internet & Moldtelecom & Pack & 200.00 & 3 & 600 \\
 \hline
-Transport & Public bus & Trip & 3.00 & 132 & 396 &\\[14pt]
+Transport & Public bus & Trip & 3.00 & 132 & 396\\
 \hline
-Phone & Moldtelecom & Pack & 30.00 & 3 & 90 &\\[14pt]
+Phone & Moldtelecom & Pack & 30.00 & 3 & 90\\
 \hline
-Electricity & Union Fenosa & KWh & 1.58 & 250 & 395 &\\[14pt]
+Electricity & Union Fenosa & KWh & 1.58 & 250 & 395\\
 \hline
-Total & & & & & 1481 &\\[14pt]
+\multicolumn{5}{|r|}{Total} & 1481 \\
 \hline
-\end{tabularx}
+\end{tabular}
 \label{table:indirect_expenses}
 \end{center}
 \end{table}
@@ -279,112 +319,138 @@ Straight line depreciation will be applied. Normally wear is computed regarding 
 
 \begin{equation}
  \begin{split}
-  Total Asset Value &= \sum_{} (AssetCost - Salvage Value) \\
+  TAV &= \sum_{} (AC - SV) \\
 		    &= (10000 - 200) + (8500 - 200) + (5700 - 200) + (8400 - 200) \\
-		    &= 31800 lei
+		    &= 31800,
  \end{split}
 \end{equation}
 
-In order to get the yearly wear, divide total asset value by the period of use of assets
+\noindent
+where $TAV$ is the total assets value, $AC$ -- assets cost, $SV$ -- salvage value. In order to get the yearly wear, divide total asset value by the period of use of assets, being 3 years.
 
 \begin{equation} \label{eq:wear}
  \begin{split}
-  Wear Per Year &= Total Asset Value / Period Of Use \\
-                &= 31800 lei/3 years= 10600 lei per year
+  WPY &= TAV / T_{use} \\
+                &= 31800/3\\
+                &= 10600,
  \end{split}
 \end{equation}
 
-Formula \eqref{eq:wear} included tangible assets which will last for 3 years and intangible assets which last only one year. The initial value of assets was
-
-\begin{equation}
- InitialAssetValue = Tangible Assets + Intangible Assets = 18500 + 14100 = 32600 lei
-\end{equation}
-
-The project takes 128 days to be finish, respectively the wear value of the assets in this particular case should be
+\noindent
+where $WPY$ is the wear per year, $TAV$ -- total assets value, $T_{use}$ -- period of use. Relation \eqref{eq:wear} included tangible assets which will last for 3 years and intangible assets which last only one year. The initial value of assets in MDL was
 
 \begin{equation}
  \begin{split}
-  ProjectWearValue &= WearPerYear / DaysInYear \cdot ProjectDuration\\
-                   &= 32600 lei / 365 days \cdot 128 days = 11432.32 lei
+ IAV &= A_t + A_i \\
+ &= 18500 + 14100 \\
+ &= 32600,
  \end{split}
 \end{equation}
 
+\noindent
+where $IAV$ is the initial assets value, $A_t$ -- tangible assets, $A_i$ -- intangible assets. The project takes 128 days to be finish, respectively the wear value of the assets in this particular case should be
+
+\begin{equation}
+ \begin{split}
+  W &= W_y / D_y \cdot T_p\\
+                   &= 32600  / 365  \cdot 128 \\
+                   &= 11432.32 ,
+ \end{split}
+\end{equation}
+
+\noindent
+where $W$ is the project wear value, $W_y$ -- wear per year, $D_y$ -- days in year, $T_p$ -- duration of the project.
+
+\addtocontents{toc}{\protect\newpage}
 \subsubsection{Product cost}
 With all the project expenses computed, it is easy to compute the product cost which includes direct and indirect expenses, salary expenses and wear expenses as shown in Table \ref{table:product_cost}.
 
 \begin{table}[!ht]
 \begin{center}
 \caption{Total Product Cost}
-\begin{tabularx}{\textwidth}{| Y | M{10em} | M{10em} |N}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{| >{\centering\arraybackslash}p{10em} | r | r |}
 \hline
-\textbf{Expense type} & \textbf{Sum (MDL)} & \textbf{Percentage (\%)} &\\[18pt]
+\textbf{Expense type} & \multicolumn{1}{>{\centering\arraybackslash}p{6em}|}{\textbf{Sum (MDL)}} & \multicolumn{1}{>{\centering\arraybackslash}p{6em}|}{\textbf{Percentage (\%)}}\\
 \hline
-Direct expenses & 1819 & 1.07 &\\[14pt]
+Direct expenses & 1819 & 1.07 \\
 \hline
-Indirect expenses & 1481 & 0.87 &\\[14pt]
+Indirect expenses & 1481 & 0.87 \\
 \hline
-Salary expenses & 144110 & 85.36  &\\[14pt]
+Salary expenses & 144110 & 85.36 \\
 \hline
-Social fund expenses & 6300 & 3.73 &\\[14pt]
+Social fund expenses & 6300 & 3.73 \\
 \hline
-Medical insurance expenses & 4200 & 2.17 &\\[14pt] % fix here
+Medical insurance expenses & 4200 & 2.17 \\
 \hline
-Asset wear expenses & 11432 & 6.77 &\\[14pt]
+Asset wear expenses & 11432 & 6.77 \\
 \hline
-\textbf{Total product cost} & \textbf{168817} & \textbf{100} &\\[14pt] 
+\textbf{Total product cost} & \textbf{168817} & \textbf{100}\\
 \hline
-\end{tabularx}
+\end{tabular}
 \label{table:product_cost}
 \end{center}
 \end{table}
+
 
 \subsubsection{Economic indicators and results}
 At this point it is crucial to sell the product to clients from medical institutions and end-users. The total product cost is very high, consequently there are 2 strategies that can be applied -- whether sell less with a high price or sell more with a lower price. It is not possible to add a percentage to the product cost that will represent the profit. It is assumed that the expected profit represents $15\%$ of the total product cost and the expected number of sold copies to be 1000. 
 
 \begin{equation}
  \begin{split}
-  Gross Price &= Total Product Cost / Number Of Copies Sold + Chosen Profit Percentage\\
-              &= 168817 lei/1000 copies + 15\% = 194.13 lei
+  GP &= C_{total} / N_{cs} + P_{p}\\
+              &= 168817/1000 + 15\% \\
+              &= 194.13,
  \end{split}
 \end{equation}
 
-This is not the price of the end product, since it is necessary to add sales tax (VAT), which represents $20\%$ and is added to the gross price. 
+\noindent
+where $GP$ is the gross price, $C_{total}$ -- total product cost, $N_{cs}$ -- number of copies sold, $P_{p}$ -- chosen profit percentage. This is not the price of the end product, since it is necessary to add sales tax (VAT), which represents $20\%$ and is added to the gross price. 
 
 \begin{equation}
  \begin{split}
-  Sale Price (incl. TVA) &= Gross Price + Sales Tax\\
-              &= 194.13 lei + 20\% = 232.96 lei
+  P_{sale} &= GP + TX_{sales}\\
+              &= 194.13  + 20\% \\
+              &= 232.96,
  \end{split}
 \end{equation}
 
-The net income is computed by multiplying gross price and the number of expected copies to be sold, which will be
+\noindent
+where $P_{sale}$ is the sale prices including VAT, $GP$ -- gross price, $TX_{sales}$ -- sales tax. The net income is computed by multiplying gross price and the number of expected copies to be sold, which will be
 
 \begin{equation}
  \begin{split}
-  Net Income &= Gross Price \cdot Number Of Copies Sold\\
-              &= 194.13 lei \cdot 1000 = 194130 lei
+  I_{net} &= GP \cdot N_{cs}\\
+              &= 194.13  \cdot 1000 \\
+              &= 194130,
  \end{split}
 \end{equation}
 
-Moreover it is necessary to compute the gross and net profit. Gross profit is computed by subtracting cost of production from the net income. Net profit can be found by subtracting $12\%$ (because it is a legal entity) from the gross profit. The indicators are the following
+\noindent
+where $I_{net}$ is the net income, $GP$ -- gross price, $N_{cs}$ -- number of copies sold. Moreover it is necessary to compute the gross and net profit. The indicators are $GPr$ -- gross profit and $NPr$ -- net profit.
 
 \begin{equation}
  \begin{split}
-  Gross Profit &= Net Income - Cost Of Production\\
-              &= 194130 - 168817 = 25313 lei\\              
-  Net Profit &= Gross Profit - 12\% \\
-             &= 25313 - 12\% = 22275.44 lei
+  GPr &= I_{net} - C_{production}\\
+              &= 194130 - 168817\\ 
+              &= 25313\\              
+  NPr &= GPr - 12\% \\
+             &= 25313 - 12\% \\
+             &= 22275.44,
  \end{split}
 \end{equation}
 
-The profitability indicators are computed below:
+\noindent
+where $I_{net}$ is the net income, $C_{production}$ -- cost of production. The profitability indicators are $C_{profit}$ -- cost profitability, $S_{profit}$ -- sales profitability computed in MDL.
 
 \begin{equation}
  \begin{split}
-  Cost Profitability &= Gross Profit / Cost Of Production \cdot 100\%\\
-              &= 25313 / 168817 \cdot 100\% = 15 \%\\              
-  SalesProfitability &= Gross Profit / Net Income \cdot 100\% \\
-             &= 25313 / 194130 \cdot 100\% = 13 \%\\
+  C_{profit} &= GPr / C_{production} \cdot 100\%\\
+              &= 25313 / 168817 \cdot 100\% \\
+              &= 15 \%\\              
+  S_{profit} &= GPr / I_{net} \cdot 100\% \\
+             &= 25313 / 194130 \cdot 100\% \\
+             &= 13 \%.
  \end{split}
 \end{equation}
 
