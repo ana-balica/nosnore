@@ -1,0 +1,58 @@
+#:kivy 1.8.0
+#:set blue (0x0F / 255., 0x1B / 255., 0x29 / 255.)
+#:set creamy (0xF6 / 255., 0xF8 / 255., 0xD3 / 255.)
+
+
+<BackgroundBoxLayout@BoxLayout>:
+    orientation: "vertical"
+    canvas:
+        Color:
+            rgb: blue
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<SleepButton@Button>:
+    background_color: creamy
+    font_name: 'assets/fonts/DroidSans.ttf'
+    font_size: '20dp'
+    bold: True
+
+
+<MenuButton@Button>:
+    font_name: 'assets/fonts/DroidSans.ttf'
+
+
+<BasicLabel@Label>:
+    markup: True
+    color: creamy
+    font_name: 'assets/fonts/DroidSans.ttf'
+
+
+<SleepScreen>:
+    id: sleep
+    BackgroundBoxLayout:
+        id: sleep
+        padding: '40dp', min(root.height, root.width) / 4., '40dp', min(root.height, root.width) / 2.
+
+        SleepButton:
+            id: toggle_rec_btn
+            text: "Start"
+            size_hint: 1, .4
+        BasicLabel:
+            id: sleep_label
+            text: "Press the Start button\n to initiate recording"
+        
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'bottom'
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: 1, .12
+            MenuButton:
+                text: 'Statistics'
+                on_press: root.manager.current = 'statistics'
+            MenuButton:
+                text: "Settings"
+                on_press: root.manager.current = 'settings'
