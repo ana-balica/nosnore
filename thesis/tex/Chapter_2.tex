@@ -106,7 +106,13 @@ Not much have been said about statistics, therefore figure \ref{fig:umlactivity}
 \label{fig:umlactivity}
 \end{figure}
 
-Components diagram in figure \ref{fig:umlcomponents} is very important for the following project, since it relies on a variety of free and open-source libraries and frameworks. The essential environment for development was Anaconda -- scientific Python distribution that consists of a set of popular scientific libraries like Numpy, Scipy, Sklearn, Matplotlib, Pylab. The core module is developed by the programmer and has modules for DSP processing, plotting and signals. The application is also dependent on tables that store important data. Actually the main dependency represents the Kivy framework -- open source Python library for rapid development of applications that make use of innovative user interfaces, such as multi-touch apps.
+Components diagram in figure \ref{fig:umlcomponents} is very important for the following project, since it relies on a variety of free and open-source libraries and frameworks. The essential environment for development was Anaconda -- scientific Python distribution that consists of a set of popular scientific libraries like Numpy, Scipy, Sklearn, Matplotlib, Pylab. The core module is developed by the programmer and has modules for DSP processing, plotting and signals. The application is also dependent on tables that store important data. Actually the main dependency represents the Kivy framework -- open source Python library for rapid development of applications that make use of innovative user interfaces, such as multi-touch application. 
+
+The main application is the central part that brings up all the dependencies. It uses the DSP module to process new signals and builds on top of the Kivy framework. It is dependent on a bunch of tables, like ``features'' and ``predictions'' table. The database is used to store large amount of training data. The data is used by logistic regression algorithm for future regressions.
+
+All the scientific packages are enclosed into a special environment. Anaconda environment provides a collection of Python scientific packages. The packages are installed into a virtual environment, hence it doesn't mess up the globally installed libraries.
+
+The diagram also contains a internal dependency -- the core module. The core module is dedicated to main DSP computations, plotting 2D for visualization of audio signals and signal encapsulation. The following module is used by the training algorithm and the application itself.
 
 \begin{figure}[!ht]
 \centering
@@ -115,6 +121,14 @@ Components diagram in figure \ref{fig:umlcomponents} is very important for the f
 \label{fig:umlcomponents}
 \end{figure}
 
-The deployment diagram is missing, since this is a client-side application, which doesn't depend on Internet or communication with a remote server. This concludes the UML part of the project, that aimed at presenting the most relevant aspect of the system and covering the general architecture of the application.
+The deployment diagram is missing, since this is a client-side application, which doesn't depend on Internet or communication with a remote server. The application resides on the client side and the deployment process is dependent on the platform.
+
+UML diagrams will allow other developers to understand the notation and become familiar with the system insides. Moreover UML diagrams can be used to generate code, focus developers attention on design patters and good practices, mine the requirements, pay attention to unclear aspects of the system, future refactoring. Overall architecture of a system is important. There exists one small issue with designing scientific application with UML. UML is particularly focused on object-oriented analysis and limits on representing procedural and functional paradigms. 
+
+Therefore the UML diagrams concentrate on the prototype application. They cover the most useful standard diagrams: use case diagrams, sequence diagrams, class diagrams, state diagrams, activity diagrams and components diagrams. All diagrams express the relationships, structural and behavioral aspects of the system.
+
+The implementation chapter focuses on the provided UML design, implements the classes and follows the use cases and sequence diagrams to define the flow of the application. The application components and dependencies will probably extend to a bigger degree. 
+
+This concludes the UML description of the project, that aimed at presenting the most relevant aspect of the system and covering the general architecture of the application. The UML methodology offered a good documentation basis and a clear view on requirements of the software.
 
 \clearpage
